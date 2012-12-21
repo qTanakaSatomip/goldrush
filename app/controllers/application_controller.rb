@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 #require 'gettext/rails'
 
 # Filters added to this controller apply to all controllers in the application.

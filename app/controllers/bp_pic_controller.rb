@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class BpPicController < ApplicationController
   def index
     list

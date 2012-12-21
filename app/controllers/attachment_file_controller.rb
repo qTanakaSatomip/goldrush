@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class AttachmentFileController < ApplicationController
   def index
     list

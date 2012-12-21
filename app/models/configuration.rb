@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class Configuration < ActiveRecord::Base
   
   validates_presence_of :config_section

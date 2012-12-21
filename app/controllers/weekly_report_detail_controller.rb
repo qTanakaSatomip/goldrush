@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class WeeklyReportDetailController < ApplicationController
 
   def index

@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class RouteExpenseDetail < ActiveRecord::Base
 
   belongs_to :route_expense

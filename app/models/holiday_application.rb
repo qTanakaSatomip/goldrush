@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class HolidayApplication < ActiveRecord::Base
   include AutoTypeName
   include DateTimeUtil

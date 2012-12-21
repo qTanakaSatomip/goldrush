@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class ApprovalAuthorityController < ApplicationController
 
   def index

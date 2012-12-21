@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 module ExpenseDetailHelper
   def view_check_box?(detail)
     detail.cutoff_status_type == 'open' && detail.credit_card_flg == 0 && detail.temporary_flg == 0

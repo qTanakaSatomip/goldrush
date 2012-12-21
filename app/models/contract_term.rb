@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class ContractTerm < ActiveRecord::Base
 
   has_many :approaches, :conditions => ["approaches.deleted = 0"]

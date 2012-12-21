@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class BaseDate < ActiveRecord::Base
   
   validates_length_of :comment1, :maximum=>255, :allow_blank => true

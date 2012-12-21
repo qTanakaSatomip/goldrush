@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class Comment < ActiveRecord::Base
   belongs_to :weekly_report
   belongs_to :user

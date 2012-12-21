@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class ExpenseApplication < ActiveRecord::Base
   include AutoTypeName
   include ApplicationUtil

@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class Business < ActiveRecord::Base
   include AutoTypeName
 

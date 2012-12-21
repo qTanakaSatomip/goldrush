@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class BusinessTripApplication < ActiveRecord::Base
   include AutoTypeName
   include ApplicationUtil

@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 require 'string_util'
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper

@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class AnalysisTemplate < ActiveRecord::Base
   include AutoTypeName
 

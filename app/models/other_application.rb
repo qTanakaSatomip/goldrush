@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class OtherApplication < ActiveRecord::Base
   include AutoTypeName
   include DateTimeUtil

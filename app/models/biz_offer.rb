@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class BizOffer < ActiveRecord::Base
   include AutoTypeName
   

@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class Announcement < ActiveRecord::Base
   validates_presence_of :announce_message
   validates_length_of :announce_message, :maximum=>4000

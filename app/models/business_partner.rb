@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class BusinessPartner < ActiveRecord::Base
   include AutoTypeName
   has_many :businesses, :conditions => ["businesses.deleted = 0"]

@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class BpPic < ActiveRecord::Base
 
   belongs_to :business_partner

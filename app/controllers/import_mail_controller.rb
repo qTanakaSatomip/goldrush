@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class ImportMailController < ApplicationController
 
   def index

@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class AnnualVacation < ActiveRecord::Base
 
   def remain_total

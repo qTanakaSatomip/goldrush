@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class BaseApplication < ActiveRecord::Base
   include AutoTypeName
   include ApplicationUtil

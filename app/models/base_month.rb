@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class BaseMonth < ActiveRecord::Base
   has_many :monthly_workings
   has_many :weekly_reports

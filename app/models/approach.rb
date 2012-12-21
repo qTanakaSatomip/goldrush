@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class Approach < ActiveRecord::Base
   include AutoTypeName
   belongs_to :biz_offer

@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class ImportMail < ActiveRecord::Base
 
   belongs_to :business_partner

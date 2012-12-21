@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class AnalysisTemplateItem < ActiveRecord::Base
 
   belongs_to :analysis_template

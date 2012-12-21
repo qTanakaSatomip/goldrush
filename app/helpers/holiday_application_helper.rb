@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 module HolidayApplicationHelper
 
   def start_date_name

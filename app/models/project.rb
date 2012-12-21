@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class Project < ActiveRecord::Base
   include AutoTypeName
   has_many :personal_sales, :conditions => "personal_sales.deleted = 0"

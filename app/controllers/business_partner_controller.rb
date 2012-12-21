@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class BusinessPartnerController < ApplicationController
   def index
     list

@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class DailyWorking < ActiveRecord::Base
   include AutoTypeName
   include DateTimeUtil

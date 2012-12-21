@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class PaymentPerCase < ActiveRecord::Base
   include AutoTypeName
   include ApplicationUtil

@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class WorkingLog < ActiveRecord::Base
   include AutoTypeName
   belongs_to :daily_working

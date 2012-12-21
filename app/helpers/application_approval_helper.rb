@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 module ApplicationApprovalHelper
 
   def report_xxx?

@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class ApprovalAuthority < ActiveRecord::Base
   include AutoTypeName
   belongs_to :user

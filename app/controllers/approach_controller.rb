@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class ApproachController < ApplicationController
   def index
     list
