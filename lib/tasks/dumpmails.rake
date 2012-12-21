@@ -1,4 +1,4 @@
-require 'tlsmail'
+#require 'tlsmail'
 namespace :app do
   def logger
     RAILS_DEFAULT_LOGGER

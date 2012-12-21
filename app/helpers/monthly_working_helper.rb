@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+require 'date_time_util'
 module MonthlyWorkingHelper
   include DateTimeUtil
 

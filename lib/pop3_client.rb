@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-require "tlsmail"
+#require "tlsmail"
 
 class MainReplyError < StandardError
 end

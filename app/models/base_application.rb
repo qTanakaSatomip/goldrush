@@ -1,4 +1,6 @@
 # -*- encoding: utf-8 -*-
+require 'auto_type_name'
+require 'application_util'
 class BaseApplication < ActiveRecord::Base
   include AutoTypeName
   include ApplicationUtil

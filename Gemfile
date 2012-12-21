@@ -41,3 +41,10 @@ gem 'jquery-rails'
 gem 'devise'
 
 gem 'dynamic_form', :git => 'git://github.com/rails/dynamic_form.git'
+
+#gem 'tlsmail'
+
+gem 'gettext_i18n_rails'
+gem 'gettext', '>=1.9.3', :require => false, :group => :development
+gem 'ruby_parser', :require => false, :group => :development
+

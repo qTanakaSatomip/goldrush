@@ -5,6 +5,8 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
+  before_filter :set_gettext_locale
+  protect_from_forgery
   helper :all # include all helpers, all the time
 
   # See ActionController::RequestForgeryProtection for details
@@ -16,12 +18,12 @@ class ApplicationController < ActionController::Base
   # from your application log (in this case, all fields with names like "password"). 
   # filter_parameter_logging :password
 
-  init_gettext "gxt"
+#  init_gettext "gxt"
 
   include NameUtil
   include TypeUtil
 
-  include AuthenticatedSystem
+#  include AuthenticatedSystem
 
   # connect to the external database.
 #  ExternalDbModel.establish_connection CbroboConnection.configurations['external_' + (ENV['RAILS_ENV'] || 'development').to_s]
@@ -29,7 +31,7 @@ class ApplicationController < ActionController::Base
   # Pick a unique cookie name to distinguish our session data from others'
 #  session :session_key => "_#{ActiveRecord::Base.configurations[RAILS_ENV]['database']}_session_id"
 #  session :secret      => 'e9ed3a2358afe17d5e0f36a8418caa1158a02502a80ca539678a2be2ab86a4088a406dc'
-  before_filter :login_required  
+#  before_filter :login_required  
 
   def rescue_action_in_public(exception)
     case exception
@@ -119,6 +121,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
+=begin
   def method_missing(method_symbol, *parameters)
     unless method_symbol.to_s.match(/^popup_(.*)/)
       raise UnknownAction, "No action responded to #{action_name}", caller
@@ -130,7 +133,7 @@ class ApplicationController < ActionController::Base
     send $1
     render :action => $1, :layout => 'popup' unless performed?
   end
-
+=end
   def check_datetime_field(paramater, model)
    paramater.each do |key,val|
       if key =~ /_at$/
