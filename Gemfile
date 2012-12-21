@@ -7,6 +7,7 @@ gem 'rails', '3.2.6'
 
 gem 'mysql2'
 
+gem 'json'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -15,7 +16,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
+  gem 'therubyracer', '= 0.10.2', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
 end
@@ -35,4 +36,8 @@ gem 'jquery-rails'
 # gem 'capistrano'
 
 # To use debugger
-# gem 'debugger'
+# gem 'ruby-debug'
+#
+gem 'devise'
+
+gem 'dynamic_form', :git => 'git://github.com/rails/dynamic_form.git'

@@ -12,10 +12,11 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: GoldRush_development
+  database: grdev
   pool: 5
-  username: root
-  password:
+#  username: trydevisedev
+  username: grdev
+  password: grdev
   socket: /var/run/mysqld/mysqld.sock
 
 # Warning: The database defined as "test" will be erased and
@@ -25,7 +26,7 @@ test:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: GoldRush_test
+  database: trydevise_test
   pool: 5
   username: root
   password:
@@ -35,7 +36,7 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: GoldRush_production
+  database: trydevise_production
   pool: 5
   username: root
   password:
