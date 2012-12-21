@@ -1,9 +1,0 @@
-<h1><%=getLongName('table_name','business_partners')%>編集</h1>
-
-<% form_tag :action => 'update', :id => @business_partner do %>
-  <%= render :partial => 'form_edit' %>
-  <%= submit_tag '更新' %>
-<% end %>
-
-<%= link_to '詳細', :action => 'show', :id => @business_partner %> |
-<%= link_to '一覧に戻る', :action => 'list' %>
