@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 GoldRush::Application.routes.draw do
+  devise_for :auth, :class_name => User
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

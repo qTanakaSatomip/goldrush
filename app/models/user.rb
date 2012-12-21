@@ -1,6 +1,30 @@
 # -*- encoding: utf-8 -*-
 require 'digest/sha1'
+require 'auto_type_name'
 class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable,
+  # :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
+  # Setup accessible (or protected) attributes for your model
+#  attr_accessible :email, :password, :password_confirmation, :remember_me
+#  attr_accessible :email, :password, :password_confirmation, :remember_me, :login, :access_level_type
+  # attr_accessible :title, :body
+
+  # see. https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-sign-in-using-their-username-or-email-address
+  before_create :create_login
+
+  def create_login             
+    self.login = self.email
+    self.access_level_type = 'normal'
+  end
+
+  def self.find_for_database_authentication(conditions)
+    self.where(:login => conditions[:email]).first || self.where(:email => conditions[:email]).first
+  end
+
   include AutoTypeName
   
   has_many :monthly_workings, :conditions => "monthly_workings.deleted = 0", :order => "start_date"
@@ -16,6 +40,7 @@ class User < ActiveRecord::Base
   has_many :annual_vacations, :conditions => "annual_vacations.deleted = 0", :order => "year"
   has_many :project_members, :conditions => "project_members.deleted = 0"
   
+=begin
   attr_protected :activated_at
   # Virtual attribute for the unencrypted password
   attr_accessor :password
@@ -121,7 +146,7 @@ class User < ActiveRecord::Base
     self.remember_token            = nil
     save(false)
   end
-
+=end
   def normal?
     ["normal","super"].include?(self.access_level_type)
   end
@@ -210,6 +235,7 @@ class User < ActiveRecord::Base
   end
 
   protected
+=begin
     # before filter 
     def encrypt_password
       return if password.blank?
@@ -220,4 +246,6 @@ class User < ActiveRecord::Base
     def password_required?
       (crypted_password.blank? || !password.blank?)
     end
+=end
 end
+

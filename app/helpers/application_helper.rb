@@ -6,6 +6,9 @@ require 'type_util'
 module ApplicationHelper
   include NameUtil
   include TypeUtil
+   def current_user
+     current_auth
+   end
 
   def j(str)
     str.gsub("'", "\\\\'")

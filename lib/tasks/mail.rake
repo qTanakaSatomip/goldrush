@@ -1,7 +1,7 @@
 namespace :mail do
   
   def logger
-    RAILS_DEFAULT_LOGGER
+    Rails.logger
   end
 
   desc "Parse and reply Mail. rake mail:recv_and_reply [DOMAIN='http://www.sharingss.net/coupe_xxx/']"

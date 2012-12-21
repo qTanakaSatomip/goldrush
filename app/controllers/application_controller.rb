@@ -33,6 +33,10 @@ class ApplicationController < ActionController::Base
 #  session :secret      => 'e9ed3a2358afe17d5e0f36a8418caa1158a02502a80ca539678a2be2ab86a4088a406dc'
 #  before_filter :login_required  
 
+  def current_user
+    current_auth
+  end
+
   def rescue_action_in_public(exception)
     case exception
       when ValidationAbort
