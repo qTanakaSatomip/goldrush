@@ -1,0 +1,27 @@
+<table class="list_table">
+  <tr>
+    <th><%=getShortName('human_resources', 'initial') %></th>
+    <th><%=getShortName('human_resources', 'human_resource_status_type') %></th>
+    <th><%=getShortName('approaches', 'approach_status_type') %></th>
+    <th>下流取引先</th>
+    <th>下流<%=getShortName('bp_pics', 'bp_pic_name') %></th>
+    <th><%=getShortName('approaches', 'approached_at') %></th>
+    <th>窓口担当者名</th>
+    <th>上流<%=getShortName('contract_terms', 'payment') %></th>
+    <th>下流<%=getShortName('contract_terms', 'payment') %></th>
+  </tr>
+  
+<% for approach in @approaches %>
+  <tr>
+    <td><%=back_to_link h(approach.bp_member.human_resource.initial), :controller => :approach, :action => :show, :id => approach %></td>
+    <td><%=h approach.bp_member.human_resource.human_resource_status_type %></td>
+    <td><%=h approach.approach_status_type_name %></td>
+    <td><%=h approach.bp_member.business_partner.business_partner_code_name %></td>
+    <td><%=h approach.bp_member.bp_pic.blank? ? "" : approach.bp_member.bp_pic.bp_pic_name %></td>
+    <td><%=h approach.approached_at %></td>
+    <td><%=h approach.approach_employee_name %>
+    <td align =right><%=h approach.approach_upper_contract_term.payment_view %>万円</td>
+    <td align =right><%=h approach.approach_down_contract_term.payment_view %>万円</td>
+  </tr>
+<% end %>
+</table>

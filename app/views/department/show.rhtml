@@ -1,0 +1,10 @@
+<table class="show_table">
+<%- for column in Department.columns -%>
+  <%- if system_column?(column.name) then next end -%>
+<tr>
+  <th><%= getLongName('departments', column.name) %></th><td><%=h @department.send(column.name) %></td>
+</tr>
+<% end %>
+</table>
+<%= link_to '編集', :action => 'edit', :id => @department %> |
+<%= link_to '一覧', :action => 'list' %>

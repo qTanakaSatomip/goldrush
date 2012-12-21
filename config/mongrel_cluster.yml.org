@@ -1,0 +1,33 @@
+#------------------------------------------------
+#CONFIG-KEY    mongrel_rails option & description
+#------------------------------------------------
+#environment   -e Rails environment to run as
+#address       -a Address to bind to
+#cwd           -c Change to dir before starting (will be expanded)
+#timeout       -o Time to wait (in seconds) before killing a stalled thread
+#throttle      -t Time to pause (in hundredths of a second) between accepting clients
+#mime_map      -m A YAML file that lists additional MIME types
+#docroot       -r Set the document root (default 'public')
+#num_procs     -n Number of processors active before clients denied
+#debug         -B Enable debugging mode
+#config_script -S Load the given file as an extra config script
+#user          --user User to run as
+#group         --group Group to run as
+#prefix        --prefix URL prefix for Rails app
+#------------------------------------------------
+#log_file      Log file name
+#port Port     number
+#servers       Server counts
+#------------------------------------------------
+
+num_procs: "1"
+cwd: "/usr/local/www/apache22/rails/Base"
+log_file: log/mongrel.log
+port: "3101"
+environment: production
+pid_file: tmp/pids/mongrel.pid
+servers: 1
+prefix: /Base
+user: sharingss
+group: members
+

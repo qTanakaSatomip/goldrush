@@ -1,0 +1,121 @@
+<%= error_messages_for 'business_partner' %>
+
+<h2>取引先</h2>
+
+<input type=button value='登録済の取引先を選択' onClick="disp_wide('<%=url_for :controller => 'business_partner', :action => 'popup_list', :flg => 'mail' %>');return false;" />
+<input type=button value='取引先情報クリア' onClick="clearBp();return false;" />
+
+<!--[form:business_partner]-->
+<p><label for="business_partner_business_partner_code"><%=getLongName('business_partners','business_partner_code')%>(任意英数3桁)</label><br /><%= text_field 'business_partner', 'business_partner_code', :size => 10  %></p>
+
+<p><label for="business_partner_sales_management_code"><%=getLongName('business_partners','sales_management_code')%></label><br /><%= text_field 'business_partner', 'sales_management_code', :size => 10  %></p>
+
+<p><label for="business_partner_business_partner_name"><%=getLongName('business_partners','business_partner_name')%></label><br /><%= text_field 'business_partner', 'business_partner_name', :size => 50  %></p>
+
+<p><label for="business_partner_business_partner_short_name"><%=getLongName('business_partners','business_partner_short_name')%></label><br /><%= text_field 'business_partner', 'business_partner_short_name', :size => 50  %></p>
+
+<p><label for="business_partner_business_partner_name_kana"><%=getLongName('business_partners','business_partner_name_kana')%>(株式会社は不要)</label><br /><%= text_field 'business_partner', 'business_partner_name_kana', :size => 50  %></p>
+
+<p><label for="business_partner_business_partner_name_en"><%=getLongName('business_partners','business_partner_name_en')%></label><br /><%= text_field 'business_partner', 'business_partner_name_en', :size => 50  %></p>
+
+<p><label for="business_partner_sales_status_type"><%=getLongName('business_partners','sales_status_type')%></label><br /><%= select 'business_partner', 'sales_status_type', $TYPE_CONDITIONS['sales_status_type'] %></p>
+
+<p><label for="business_partner_ceo_name"><%=getLongName('business_partners','ceo_name')%></label><br /><%= text_field 'business_partner', 'ceo_name'  %></p>
+
+<p><label for="business_partner_url"><%=getLongName('business_partners','url')%></label><br /><%= text_field 'business_partner', 'url', :size => 50  %></p>
+
+<p><label for="business_partner_zip"><%=getLongName('business_partners','zip')%></label><br /><%= text_field 'business_partner', 'zip', :size => 12  %></p>
+
+<p><label for="business_partner_address1"><%=getLongName('business_partners','address1')%>(都道府県)</label><br /><%= select 'business_partner', 'address1', User.get_prefs  %></p>
+
+<p><label for="business_partner_address2"><%=getLongName('business_partners','address2')%></label><br /><%= text_field 'business_partner', 'address2'  %></p>
+
+<p><label for="business_partner_tel"><%=getLongName('business_partners','tel')%></label><br /><%= text_field 'business_partner', 'tel'  %></p>
+
+<p><label for="business_partner_fax"><%=getLongName('business_partners','fax')%></label><br /><%= text_field 'business_partner', 'fax'  %></p>
+
+<p><label for="business_partner_email"><%=getLongName('business_partners','email')%></label><br /><%= text_field 'business_partner', 'email'  %></p>
+
+<p><label for="business_partner_category"><%=getLongName('business_partners','category')%></label><br /><%= text_field 'business_partner', 'category'  %></p>
+
+<p><label for="business_partner_self_flg"><%=getLongName('business_partners','self_flg')%></label><br /><%= check_box 'business_partner', 'self_flg'  %></p>
+
+<p><label for="business_partner_eu_flg"><%=getLongName('business_partners','eu_flg')%></label><br /><%= check_box 'business_partner', 'eu_flg'  %></p>
+
+<p><label for="business_partner_upper_flg"><%=getLongName('business_partners','upper_flg')%></label><br /><%= check_box 'business_partner', 'upper_flg'  %></p>
+
+<p><label for="business_partner_down_flg"><%=getLongName('business_partners','down_flg')%></label><br /><%= check_box 'business_partner', 'down_flg'  %></p>
+
+<p><label for="business_partner_memo"><%=getLongName('business_partners','memo')%></label><br /><%= resizable_area 'business_partner', 'memo'  %></p>
+
+<!--[eoform:business_partner]-->
+
+
+<h2>取引先担当</h2>
+<!--[form:bp_pic]-->
+  <%= render :partial => 'bp_pic/form' %>
+<!--[eoform:bp_pic]-->
+
+<%= hidden_field 'business_partner', 'id' %>
+
+<%= hidden_field 'business_partner', 'import_mail_id' %>
+<%= hidden_field 'bp_pic', 'import_mail_id' %>
+
+<%= hidden_field 'business_partner', 'lock_version' %>
+<%= back_to_field_tag %>
+
+<script type="text/javascript">
+<!--
+
+document.setBpFull = function(bp) {
+    document.getElementById("business_partner_id").value = bp.id
+    document.getElementById("business_partner_business_partner_code").value = bp.business_partner_code
+    document.getElementById("business_partner_sales_management_code").value = bp.sales_management_code
+    document.getElementById("business_partner_business_partner_name").value = bp.business_partner_name
+    document.getElementById("business_partner_business_partner_short_name").value = bp.business_partner_short_name
+    document.getElementById("business_partner_business_partner_name_kana").value = bp.business_partner_name_kana
+    document.getElementById("business_partner_business_partner_name_en").value = bp.business_partner_name_en
+    document.getElementById("business_partner_sales_status_type").value = bp.sales_status_type
+    document.getElementById("business_partner_ceo_name").value = bp.ceo_name
+    document.getElementById("business_partner_url").value = bp.url
+    document.getElementById("business_partner_zip").value = bp.zip
+    document.getElementById("business_partner_address1").value = bp.address1
+    document.getElementById("business_partner_address2").value = bp.address2
+    document.getElementById("business_partner_tel").value = bp.tel
+    document.getElementById("business_partner_fax").value = bp.fax
+    document.getElementById("business_partner_email").value = bp.email
+    document.getElementById("business_partner_category").value = bp.category
+    document.getElementById("business_partner_self_flg").checked = (bp.self_flg==1)
+    document.getElementById("business_partner_eu_flg").checked = (bp.eu_flg==1)
+    document.getElementById("business_partner_upper_flg").checked = (bp.upper_flg==1)
+    document.getElementById("business_partner_down_flg").checked = (bp.down_flg==1)
+    document.getElementById("business_partner_memo").value = bp.memo
+}
+
+function clearBp(){
+    document.getElementById("business_partner_id").value = "";
+    document.getElementById("business_partner_business_partner_code").value = "";
+    document.getElementById("business_partner_sales_management_code").value = "";
+    document.getElementById("business_partner_business_partner_name").value = "";
+    document.getElementById("business_partner_business_partner_short_name").value = "";
+    document.getElementById("business_partner_business_partner_name_kana").value = "";
+    document.getElementById("business_partner_business_partner_name_en").value = "";
+    document.getElementById("business_partner_sales_status_type").value = "";
+    document.getElementById("business_partner_ceo_name").value = "";
+    document.getElementById("business_partner_url").value = "";
+    document.getElementById("business_partner_zip").value = "";
+    document.getElementById("business_partner_address1").value = "";
+    document.getElementById("business_partner_address2").value = "";
+    document.getElementById("business_partner_tel").value = "";
+    document.getElementById("business_partner_fax").value = "";
+    document.getElementById("business_partner_email").value = "";
+    document.getElementById("business_partner_category").value = "";
+    document.getElementById("business_partner_self_flg").checked = false;
+    document.getElementById("business_partner_eu_flg").checked = false;
+    document.getElementById("business_partner_upper_flg").checked = false;
+    document.getElementById("business_partner_down_flg").checked = false;
+    document.getElementById("business_partner_memo").value = "";
+}
+
+// -->
+</script>

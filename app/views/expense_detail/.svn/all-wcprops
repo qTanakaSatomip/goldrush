@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/projects/!svn/ver/181/Applicative/GoldRush/develop/Base/app/views/expense_detail
+END
+show.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/projects/!svn/ver/103/Applicative/GoldRush/develop/Base/app/views/expense_detail/show.rhtml
+END
+_form.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/projects/!svn/ver/181/Applicative/GoldRush/develop/Base/app/views/expense_detail/_form.rhtml
+END
+titles.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/projects/!svn/ver/103/Applicative/GoldRush/develop/Base/app/views/expense_detail/titles.rhtml
+END
+edit.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/projects/!svn/ver/103/Applicative/GoldRush/develop/Base/app/views/expense_detail/edit.rhtml
+END
+_table.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/projects/!svn/ver/103/Applicative/GoldRush/develop/Base/app/views/expense_detail/_table.rhtml
+END
+new.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/projects/!svn/ver/103/Applicative/GoldRush/develop/Base/app/views/expense_detail/new.rhtml
+END
+list.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/projects/!svn/ver/181/Applicative/GoldRush/develop/Base/app/views/expense_detail/list.rhtml
+END
+print.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/projects/!svn/ver/103/Applicative/GoldRush/develop/Base/app/views/expense_detail/print.rhtml
+END
+detail_list.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/projects/!svn/ver/103/Applicative/GoldRush/develop/Base/app/views/expense_detail/detail_list.rhtml
+END

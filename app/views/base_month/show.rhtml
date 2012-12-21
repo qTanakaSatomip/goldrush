@@ -1,0 +1,18 @@
+<h1><%=getLongName('table_name','base_months')%>表示</h1>
+<table class="show_table">
+  <tr>
+    <th><%=getLongName('base_months','report_month')%></th>
+    <td><%=h @base_month.report_month %></td>
+  </tr>
+  <tr>
+    <th><%=getLongName('base_months','start_date')%></th>
+    <td><%=h @base_month.start_date.to_date if @base_month.start_date != nil %></td>
+  </tr>
+  <tr>
+    <th><%=getLongName('base_months','end_date')%></th>
+    <td><%=h @base_month.end_date.to_date if @base_month.end_date != nil %></td>
+  </tr>
+</table>
+
+<%= link_to '編集', :action => 'edit', :id => @base_month %> |
+<%= link_to '一覧', :action => 'list' %>

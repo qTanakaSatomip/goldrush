@@ -1,0 +1,2 @@
+module BizOfferHelper
+end

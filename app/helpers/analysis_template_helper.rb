@@ -1,0 +1,2 @@
+module AnalysisTemplateHelper
+end

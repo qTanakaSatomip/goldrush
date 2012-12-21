@@ -1,0 +1,41 @@
+<table class="list_table">
+  <tr>
+    <th><%=getShortName('interviews', 'interview_number') %></th>
+    <th><%=getShortName('interviews', 'interview_status_type') %></th>
+    <th><%=getShortName('interviews', 'interview_appoint_at') %></th>
+    <th><%=getShortName('interviews', 'interview_prace') %></th>
+    <th>面談担当者名</th>
+    <th>面談<%=getShortName('business_partners', 'business_partner_name') %>(上流)</th>
+    <th>面談<%=getShortName('bp_pics', 'bp_pic_name') %>(上流)</th>
+    <th>成約情報</th>
+    <th><%=getShortName('interviews', 'memo') %></th>
+    <th></th>
+    <th></th>
+  </tr>
+  
+<% for interview in @interviews %>
+  <tr>
+    <td><%=h interview.interview_number %></td>
+    <td><%=h interview.interview_status_type %></td>
+    <td><%=h interview.interview_appoint_at %></td>
+    <td><%=h interview.interview_prace %></td>
+    <td><%=h interview.interview_employee_name %>
+    <td><%=h interview.interview_bp.blank? ? "" : interview.interview_bp.business_partner_name %></td>
+    <td><%=h interview.interview_bp_pic.blank? ? "" : interview.interview_bp_pic.bp_pic_name %></td>
+    <td align=center><%=h (interview.succeed == 1 ? "○" : "") %></td>
+    <td><%=h interview.memo %></td>
+    
+    <% if interview.interview_status_type == 'interview_waiting' || interview.interview_status_type == 'result_waiting' || interview.interview_status_type == 'adjusting' %>
+      <td>
+        <%= link_to '変更', { :controller => 'interview', :action => 'edit', :id => interview } %>
+      </td>
+      <td>
+        <%= link_to '削除', { :controller => 'interview', :action => 'destroy', :id => interview }, :confirm => 'この情報を削除します。よろしいですか?', :method => :post %>
+      </td>
+    <% else %>
+      <td></td><td></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+

@@ -1,0 +1,39 @@
+<h1><%=getLongName('table_name','payment_per_cases')%>一覧</h1>
+
+<div class="pagenate">
+<%= @payment_per_case_pages.current.previous ? link_to('前のページ', { :page => @payment_per_case_pages.current.previous }) : '前のページ' %>
+<%= @payment_per_case_pages.current.next ? link_to('次のページ', { :page => @payment_per_case_pages.current.next }) : '次のページ' %> 
+</div>
+
+<table class="list_table">
+  <tr>
+  <% for column in PaymentPerCase.columns %>
+    <% if system_column?(column.name) then next end %>
+    <th><%=getShortName('payment_per_cases', column.name)%></th>
+  <% end %>
+    <th></th>
+  </tr>
+  
+<% for payment_per_case in @payment_per_cases %>
+  <tr>
+  <% for column in PaymentPerCase.columns %>
+    <% if system_column?(column.name) then next end %>
+    <td><%=h payment_per_case.send(column.name) %></td>
+  <% end %>
+    <td>
+      <%= link_to '表示', :action => 'show', :id => payment_per_case %>, 
+      <%= link_to '変更', :action => 'edit', :id => payment_per_case %>, 
+      <%= link_to '削除', { :action => 'destroy', :id => payment_per_case }, :confirm => 'この情報を削除します。よろしいですか?', :method => :post %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<div class="pagenate">
+<%= @payment_per_case_pages.current.previous ? link_to('前のページ', { :page => @payment_per_case_pages.current.previous }) : '前のページ' %>
+<%= @payment_per_case_pages.current.next ? link_to('次のページ', { :page => @payment_per_case_pages.current.next }) : '次のページ' %> 
+</div>
+
+<br />
+
+<%= link_to (getLongName('table_name','payment_per_cases')+'の新規作成'), :action => 'new' %>

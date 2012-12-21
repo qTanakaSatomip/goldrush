@@ -1,0 +1,10 @@
+<table class="show_table">
+<%- for column in Name.columns -%>
+  <%- if system_column?(column.name) then next end -%>
+<tr>
+  <th><%= getLongName('names', column.name) %></th><td><%=h @name.send(column.name) %></td>
+</tr>
+<% end %>
+</table>
+<%= link_to '編集', :action => 'edit', :id => @name %> |
+<%= link_to '一覧', :action => 'list' %>

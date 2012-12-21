@@ -1,0 +1,2 @@
+module BpPicHelper
+end

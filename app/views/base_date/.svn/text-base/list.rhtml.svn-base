@@ -1,0 +1,38 @@
+<h1>祝日一覧</h1>
+
+<div class="pagenate">
+<%= @base_date_pages.current.previous ? link_to('前のページ', { :page => @base_date_pages.current.previous }) : '前のページ' %>
+<%= @base_date_pages.current.next ? link_to('次のページ', { :page => @base_date_pages.current.next }) : '次のページ' %> 
+</div>
+
+<table class="list_table">
+  <tr>
+    <th><%=getLongName('base_dates','calendar_date')%></th>
+    <th>曜日</th>
+    <th>祝日内容</th>
+    <th>処理</th>
+  </tr>
+  
+<% for base_date in @base_dates %>
+  <tr>
+    <td><%=h base_date.calendar_date.to_date %></td>
+    <td><%=h getDayOfWeekDay(base_date.day_of_week) %>曜日</td>
+    <td><%=h base_date.comment1 %></td>
+
+    <td>
+      <%= link_to '表示', :action => 'show', :id => base_date %>, 
+      <%= link_to '変更', :action => 'edit', :id => base_date %>, 
+      <%= link_to '削除', { :action => 'destroy_holiday', :id => base_date }, :confirm => 'この祝日を平日にします。よろしいですか?', :method => :post %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<div class="pagenate">
+<%= @base_date_pages.current.previous ? link_to('前のページ', { :page => @base_date_pages.current.previous }) : '前のページ' %>
+<%= @base_date_pages.current.next ? link_to('次のページ', { :page => @base_date_pages.current.next }) : '次のページ' %> 
+</div>
+
+<br />
+
+<%= link_to '祝日の新規作成', :action => 'new' %>

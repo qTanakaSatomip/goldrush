@@ -1,0 +1,34 @@
+<table class="show_table">
+<tr>
+  <th><%= getLongName('business_partners', 'business_partner_name') %></th><td><%=h @bp_pic.business_partner.business_partner_name %></td>
+</tr>
+<tr>
+  <th><%= getLongName('bp_pics', 'bp_pic_name') %></th><td><%=h @bp_pic.bp_pic_name %></td>
+</tr>
+<tr>
+  <th><%= getLongName('bp_pics', 'bp_pic_name_kana') %></th><td><%=h @bp_pic.bp_pic_name_kana %></td>
+</tr>
+<tr>
+  <th><%= getLongName('bp_pics', 'depertment') %></th><td><%=h @bp_pic.depertment %></td>
+</tr>
+<tr>
+  <th><%= getLongName('bp_pics', 'position') %></th><td><%=h @bp_pic.position %></td>
+</tr>
+<tr>
+  <th><%= getLongName('bp_pics', 'tel_direct') %></th><td><%=h @bp_pic.tel_direct %></td>
+</tr>
+<tr>
+  <th><%= getLongName('bp_pics', 'tel_mobile') %></th><td><%=h @bp_pic.tel_mobile %></td>
+</tr>
+<tr>
+  <th><%= getLongName('bp_pics', 'email1') %></th><td><%=h @bp_pic.email1 %></td>
+</tr>
+<tr>
+  <th><%= getLongName('bp_pics', 'email2') %></th><td><%=h @bp_pic.email2 %></td>
+</tr>
+<tr>
+  <th><%= getLongName('bp_pics', 'memo') %></th><td><%=h @bp_pic.memo %></td>
+</tr>
+</table>
+<%= back_to_link '編集', :action => 'edit', :id => @bp_pic %> |
+<%= link_or_back '戻る', :action => 'list' %>

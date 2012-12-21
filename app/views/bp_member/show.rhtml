@@ -1,0 +1,36 @@
+<h1><%= @human_resource.human_resource_name.blank? ? @human_resource.initial : @human_resource.human_resource_name %>(<%= @bp_member.business_partner.business_partner_code_name %>)詳細</h1>
+
+<h2><%=getLongName('table_name','bp_members')%>情報</h2>
+<%= render :partial => 'bp_member/show' %>
+<%= back_to_link '編集', :action => 'edit', :id => @bp_member, :human_resource_id => @human_resource %> |
+<%= link_or_back '戻る', :action => 'list' %>
+<p></p>
+
+<h2><%=getLongName('table_name','human_resources')%>情報</h2>
+<%= render :partial => 'human_resource/show' %>
+<%= back_to_link '所属に追加', :action => 'new', :human_resource_id => @human_resource %>
+<p></p>
+
+<h2>経歴書一覧</h2>
+
+<% if !@attachment_files.blank? %>
+  <%= render :partial => 'attachment_file/list' %>
+<% end %>
+
+<% form_tag({:controller => 'attachment_file', :action => 'create', :parent_table => 'bp_members', :parent_id => @bp_member, :back_to => request.env['REQUEST_URI']}, :multipart => true) do %>
+  <div align=right>
+  <table>
+    <tr>
+      <td rowspan=2>経歴書のアップロード </td>
+      <td><%= file_field_tag 'upfile', :size => 60 %></td>
+    </tr>
+    <tr>
+      <td><%= submit_tag "アップロードする" %></td>
+    </tr>
+  </table>
+  </div>
+<% end %>
+
+
+
+

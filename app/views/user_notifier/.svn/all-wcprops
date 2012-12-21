@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/projects/!svn/ver/103/Applicative/GoldRush/develop/Base/app/views/user_notifier
+END
+signup_notification.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/projects/!svn/ver/103/Applicative/GoldRush/develop/Base/app/views/user_notifier/signup_notification.rhtml
+END
+activation.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/projects/!svn/ver/103/Applicative/GoldRush/develop/Base/app/views/user_notifier/activation.rhtml
+END
+forgot_password.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/projects/!svn/ver/103/Applicative/GoldRush/develop/Base/app/views/user_notifier/forgot_password.rhtml
+END

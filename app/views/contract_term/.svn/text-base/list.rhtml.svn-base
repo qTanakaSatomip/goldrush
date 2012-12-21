@@ -1,0 +1,121 @@
+<h1><%=getLongName('table_name','contract_terms')%>一覧</h1>
+
+<%= put_paginates(@contract_term_pages, 'paginate', @contract_term_pages.item_count) %>
+
+<table class="list_table">
+  <tr>
+    <th><%=getShortName('contract_terms', 'id') %></th>
+
+    <th><%=getShortName('contract_terms', 'contract_type') %></th>
+
+    <th><%=getShortName('contract_terms', 'payment') %></th>
+
+    <th><%=getShortName('contract_terms', 'time_adjust_flg') %></th>
+
+    <th><%=getShortName('contract_terms', 'time_adjust_upper') %></th>
+
+    <th><%=getShortName('contract_terms', 'time_adjust_limit') %></th>
+
+    <th><%=getShortName('contract_terms', 'time_adjust_under') %></th>
+
+    <th><%=getShortName('contract_terms', 'time_adjust_type') %></th>
+
+    <th><%=getShortName('contract_terms', 'over_time_payment') %></th>
+
+    <th><%=getShortName('contract_terms', 'under_time_penalty') %></th>
+
+    <th><%=getShortName('contract_terms', 'cutoff_date') %></th>
+
+    <th><%=getShortName('contract_terms', 'payment_sight_type_type') %></th>
+
+    <th><%=getShortName('contract_terms', 'contract_end_date') %></th>
+
+    <th><%=getShortName('contract_terms', 'contract_renewal_unit') %></th>
+
+    <th><%=getShortName('contract_terms', 'contract_renewal_terms') %></th>
+
+    <th><%=getShortName('contract_terms', 'other_terms') %></th>
+
+    <th><%=getShortName('contract_terms', 'memo') %></th>
+
+    <th><%=getShortName('contract_terms', 'created_at') %></th>
+
+    <th><%=getShortName('contract_terms', 'updated_at') %></th>
+
+    <th><%=getShortName('contract_terms', 'lock_version') %></th>
+
+    <th><%=getShortName('contract_terms', 'created_user') %></th>
+
+    <th><%=getShortName('contract_terms', 'updated_user') %></th>
+
+    <th><%=getShortName('contract_terms', 'deleted_at') %></th>
+
+    <th><%=getShortName('contract_terms', 'deleted') %></th>
+
+    <th></th>
+  </tr>
+  
+<% for contract_term in @contract_terms %>
+  <tr>
+    <td><%=h contract_term.id %></td>
+
+    <td><%=h contract_term.contract_type %></td>
+
+    <td><%=h contract_term.payment %></td>
+
+    <td><%=h contract_term.time_adjust_flg %></td>
+
+    <td><%=h contract_term.time_adjust_upper %></td>
+
+    <td><%=h contract_term.time_adjust_limit %></td>
+
+    <td><%=h contract_term.time_adjust_under %></td>
+
+    <td><%=h contract_term.time_adjust_type %></td>
+
+    <td><%=h contract_term.over_time_payment %></td>
+
+    <td><%=h contract_term.under_time_penalty %></td>
+
+    <td><%=h contract_term.cutoff_date %></td>
+
+    <td><%=h contract_term.payment_sight_type %></td>
+
+    <td><%=h contract_term.contract_end_date %></td>
+
+    <td><%=h contract_term.contract_renewal_unit %></td>
+
+    <td><%=h contract_term.contract_renewal_terms %></td>
+
+    <td><%=h contract_term.other_terms %></td>
+
+    <td><%=h contract_term.memo %></td>
+
+    <td><%=h contract_term.created_at %></td>
+
+    <td><%=h contract_term.updated_at %></td>
+
+    <td><%=h contract_term.lock_version %></td>
+
+    <td><%=h contract_term.created_user %></td>
+
+    <td><%=h contract_term.updated_user %></td>
+
+    <td><%=h contract_term.deleted_at %></td>
+
+    <td><%=h contract_term.deleted %></td>
+
+    <td>
+      <%= link_to '詳細', :action => 'show', :id => contract_term %>, 
+      <%= link_to '変更', :action => 'edit', :id => contract_term %>, 
+      <%= link_to '削除', { :action => 'destroy', :id => contract_term }, :confirm => 'この情報を削除します。よろしいですか?', :method => :post %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<%= put_paginates(@contract_term_pages, 'paginate', @contract_term_pages.item_count) %>
+
+<br />
+
+<%= link_to (getLongName('table_name','contract_terms')+'の新規作成'), :action => 'new' %>

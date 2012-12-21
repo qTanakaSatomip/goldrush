@@ -1,0 +1,17 @@
+<%= error_messages_for 'base_date' %>
+
+<!--[form:base_date]-->
+<table class="input_table">
+  <tr>
+    <th><label for="base_date_calendar_date"><%=getLongName('base_dates','calendar_date')%></label></th>
+    <td><%= date_field 'base_date', 'calendar_date' %></td>
+  </tr>
+  <tr>
+    <th><label for="base_date_comment1">祝日内容</label></th>
+    <td><%= text_field 'base_date', 'comment1', :size => '60' %></td>
+  </tr>
+</table>
+
+<p><%= hidden_field 'base_date', 'lock_version'  %></p>
+
+<!--[eoform:base_date]-->

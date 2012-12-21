@@ -1,0 +1,60 @@
+<table class="show_table">
+<tr>
+  <th><%= getLongName('analysis_template_items', 'id') %></th><td><%=h @analysis_template_item.id %></td>
+</tr>
+
+<tr>
+  <th><%= getLongName('analysis_template_items', 'analysis_template_item_name') %></th><td><%=h @analysis_template_item.analysis_template_item_name %></td>
+</tr>
+
+<tr>
+  <th><%= getLongName('analysis_template_items', 'pattern') %></th><td><%=h @analysis_template_item.pattern %></td>
+</tr>
+
+<tr>
+  <th><%= getLongName('analysis_template_items', 'ignore_flg') %></th><td><%=h @analysis_template_item.ignore_flg %></td>
+</tr>
+
+<tr>
+  <th><%= getLongName('analysis_template_items', 'target_table_name') %></th><td><%=h @analysis_template_item.target_table_name %></td>
+</tr>
+
+<tr>
+  <th><%= getLongName('analysis_template_items', 'target_column_name') %></th><td><%=h @analysis_template_item.target_column_name %></td>
+</tr>
+
+<tr>
+  <th><%= getLongName('analysis_template_items', 'memo') %></th><td><%=h @analysis_template_item.memo %></td>
+</tr>
+
+<tr>
+  <th><%= getLongName('analysis_template_items', 'created_at') %></th><td><%=h @analysis_template_item.created_at %></td>
+</tr>
+
+<tr>
+  <th><%= getLongName('analysis_template_items', 'updated_at') %></th><td><%=h @analysis_template_item.updated_at %></td>
+</tr>
+
+<tr>
+  <th><%= getLongName('analysis_template_items', 'lock_version') %></th><td><%=h @analysis_template_item.lock_version %></td>
+</tr>
+
+<tr>
+  <th><%= getLongName('analysis_template_items', 'created_user') %></th><td><%=h @analysis_template_item.created_user %></td>
+</tr>
+
+<tr>
+  <th><%= getLongName('analysis_template_items', 'updated_user') %></th><td><%=h @analysis_template_item.updated_user %></td>
+</tr>
+
+<tr>
+  <th><%= getLongName('analysis_template_items', 'deleted_at') %></th><td><%=h @analysis_template_item.deleted_at %></td>
+</tr>
+
+<tr>
+  <th><%= getLongName('analysis_template_items', 'deleted') %></th><td><%=h @analysis_template_item.deleted %></td>
+</tr>
+
+</table>
+<%= link_to '編集', :action => 'edit', :id => @analysis_template_item %> |
+<%= link_to '一覧', :action => 'list' %>

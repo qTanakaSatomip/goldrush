@@ -1,0 +1,16 @@
+<%= error_messages_for 'base_month' %>
+
+
+
+<p><label for="base_month_report_month"><%=getLongName('base_months','report_month')%></label><br /><%= text_field 'base_month', 'report_month'  %></p>
+<p><label for="base_month_start_date"><%=getLongName('base_months','start_date')%></label><br /><%= date_select 'base_month', 'start_date'  %></p>
+<p><label for="base_month_end_date"><%=getLongName('base_months','end_date')%></label><br /><%= date_select 'base_month', 'end_date'  %></p>
+<% if false %>
+<p><label for="base_month_last_flg"><%=getLongName('base_months','last_flg')%></label><br /><%= text_field 'base_month', 'last_flg'  %></p>
+<p><label for="base_month_current_flg"><%=getLongName('base_months','current_flg')%></label><br /><%= text_field 'base_month', 'current_flg'  %></p>
+<% end %>
+
+
+<p><%= hidden_field 'base_month', 'lock_version'  %></p>
+
+

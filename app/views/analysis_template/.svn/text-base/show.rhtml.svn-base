@@ -1,0 +1,30 @@
+<table class="show_table">
+<tr>
+  <th><%= getLongName('analysis_templates', 'analysis_template_name') %></th>
+  <td><%=h @analysis_template.analysis_template_name %></td>
+</tr>
+<tr>
+  <th><%= getLongName('business_partners', 'business_partner_name') %></th>
+  <td><%=h @analysis_template.business_partner.business_partner_name if @analysis_template.business_partner %></td>
+</tr>
+<tr>
+  <th><%= getLongName('bp_pics', 'bp_pic_name') %></th>
+  <td><%=h @analysis_template.bp_pic.bp_pic_name if @analysis_template.bp_pic %></td>
+</tr>
+
+<tr>
+  <th><%= getLongName('analysis_templates', 'memo') %></th><td><%= simple_format h(@analysis_template.memo) %></td>
+</tr>
+
+</table>
+<%= back_to_link '編集', :action => 'edit', :id => @analysis_template %> |
+<%= link_or_back '戻る', :action => 'list' %>
+<p></p>
+
+<!-- 解析項目 -->
+<h2><%=getLongName('table_name','analysis_template_items')%>情報</h2>
+<%= render :partial => 'analysis_template_item/list' %>
+<%= link_to (getLongName('table_name','analysis_template_items')+'の追加'), :controller => :analysis_template_item, :action => 'new', :analysis_template => @analysis_template %>
+
+
+

@@ -1,0 +1,131 @@
+<h1><%=getLongName('table_name','bp_members')%>一覧</h1>
+
+<% form_tag do %>
+<table>
+  <tr>
+    <td style="text-align: right">人材氏名：</td>
+    <td>
+      <%= text_field_tag 'hr_name', session[:bp_member_search] && session[:bp_member_search][:hr_name] %>
+    </td>
+    <td style="text-align: right">年齢：</td>
+    <td>
+      <%= text_field_tag 'age_from', session[:bp_member_search] && session[:bp_member_search][:age_from], :size => 3 %>
+        ～ <%= text_field_tag 'age_to', session[:bp_member_search] && session[:bp_member_search][:age_to], :size => 3 %>
+    </td>
+    <td style="text-align: right">性別：</td>
+    <td>
+      <%=select_tag 'sex_type', options_for_select([[]] + $TYPE_CONDITIONS['sex_type'], session[:bp_member_search] && session[:bp_member_search][:sex_type]) %>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right">スキル：</td>
+    <td>
+      <%= text_field_tag 'skill_tag', session[:bp_member_search] && session[:bp_member_search][:skill_tag] %>
+    </td>
+    <td style="text-align: right">ステータス：</td>
+    <td>
+      <%= select_tag 'human_resource_status_type', options_for_select([[]] + $TYPE_CONDITIONS['human_resource_status_type'], session[:bp_member_search] && session[:bp_member_search][:human_resource_status_type]) %>
+    </td>
+    <td style="text-align: right">下流取引先：</td>
+    <td>
+      <%= text_field_tag 'bp_name', session[:bp_member_search] && session[:bp_member_search][:business_partner_name], :readOnly => true, :style => "background-color: silver;", :size => 20  %>
+      <input type=button value='...' onClick="disp_wide('<%=url_for :controller => 'business_partner', :action => 'popup_list', :flg => 'down' %>');return false;" />
+      <input type=button value='クリア' onClick="clearBp();return false;" />
+      <%= hidden_field_tag 'bp_id', session[:bp_member_search][:business_partner_id] %>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right">雇用形態：</td>
+    <td>
+      <%=select_tag 'employment_type', options_for_select([[]] + $TYPE_CONDITIONS['employment_type'], session[:bp_member_search] && session[:bp_member_search][:employment_type]) %>
+    </td>
+    <td style="text-align: right">単価下限：</td>
+    <td>
+      <%= text_field_tag 'payment_min', session[:bp_member_search] && session[:bp_member_search][:payment_min], :size => 5 %>万円 ～
+    </td>
+  </tr>
+</table>
+<p><%= submit_tag '　　検索　　', :name => 'search_button' %> <%= submit_tag '　　クリア　　', :name => 'clear_button' %></p>
+<br />
+<% end %>
+
+<%= put_paginates(@bp_member_pages, 'paginate', @bp_member_pages.item_count) %>
+
+<table class="list_table">
+  <tr>
+    <th><%=getShortName('human_resources', 'human_resource_name') %></th>
+    <th><%=getShortName('human_resources', 'age') %></th>
+    <th><%=getShortName('human_resources', 'sex_type') %></th>
+    <th><%=getShortName('human_resources', 'skill_tag') %></th>
+    <th><%=getShortName('human_resources', 'human_resource_status_type') %></th>
+    <th>下流取引先</th>
+    <th>下流<%=getShortName('bp_pics', 'bp_pic_name') %></th>
+    <th><%=getShortName('bp_members', 'employment_type') %></th>
+    <th><%=getShortName('bp_members', 'payment_min') %></th>
+    <th>添付ファイル</th>
+  </tr>
+
+
+<% for bp_member in @bp_members %>
+  <tr>
+<% if popup? %>
+  <% if bp_member.human_resource.human_resource_name.blank? %>
+    <td><%=link_to h(bp_member.human_resource.initial), '#', :onClick => "setBpMember(#{bp_member.id},'#{bp_member.business_partner.business_partner_name}','#{bp_member.human_resource.initial}');return false;" %></td>
+  <% else %>
+    <td><%=link_to h(bp_member.human_resource.human_resource_name), '#', :onClick => "setBpMember(#{bp_member.id},'#{bp_member.business_partner.business_partner_name}','#{bp_member.human_resource.human_resource_name}');return false;" %></td>
+  <% end %>
+<% else %>
+  <% if bp_member.human_resource.human_resource_name.blank? %>
+    <td><%=back_to_link h(bp_member.human_resource.initial), :action => :show, :id => bp_member %></td>
+  <% else %>
+    <td><%=back_to_link h(bp_member.human_resource.human_resource_name), :action => :show, :id => bp_member %></td>
+  <% end %>
+<% end %>
+    <td><%=h bp_member.human_resource.age %></td>
+    <td><%=h bp_member.human_resource.sex_type %></td>
+    <td><%=h bp_member.human_resource.skill_tag %></td>
+    <td><%=h bp_member.human_resource.human_resource_status_type %></td>
+    <td><%=h bp_member.business_partner.business_partner_code_name %></td>
+    <td><%=h bp_member.bp_pic.blank? ? "" : bp_member.bp_pic.bp_pic_name %></td>
+    <td><%=h bp_member.employment_type_name %></td>
+    <td align=right><%=h((bp_member.payment_min.blank? || bp_member.payment_min == 0) ? "" : "#{bp_member.payment_min_view}万円") %></td>
+    <td align=center><%=h bp_member.attachment? ? "○" : "" %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= put_paginates(@bp_member_pages, 'paginate', @bp_member_pages.item_count) %>
+
+<br />
+
+<% if !popup? %>
+<%= link_to (getLongName('table_name','bp_members')+'の新規作成'), :action => 'new' %>
+<% end %>
+
+<script type="text/javascript">
+<!--
+
+document.setBp = function(bp) {
+    document.getElementById("bp_name").value = bp.business_partner_name;
+    document.getElementById("bp_id").value = bp.business_partner_id;
+}
+
+function clearBp(){
+    document.getElementById("bp_name").value = "";
+    document.getElementById("bp_id").value = "";
+}
+
+function setBpMember(bp_member_id, business_partner_name, human_resource_name) {
+  if(window.opener.document.setBpMember){
+    var bp_member = new Object();
+    bp_member.bp_member_id = bp_member_id;
+    bp_member.business_partner_name = business_partner_name;
+    bp_member.human_resource_name = human_resource_name;
+    window.opener.document.setBpMember(bp_member);
+  }
+  window.close();
+}
+
+// -->
+</script>
+

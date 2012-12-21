@@ -1,0 +1,2 @@
+class ValidationAbort < Exception
+end

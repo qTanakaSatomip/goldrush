@@ -1,0 +1,81 @@
+<%= error_messages_for 'bp_member' %>
+
+
+<h2>人材</h2>
+<!--[form:human_resource]-->
+  <%= render :partial => 'human_resource/form' %>
+<!--[eoform:human_resource]-->
+
+
+<h2>所属</h2>
+<!--[form:bp_member]-->
+  <%= hidden_field 'bp_member', 'human_resource_id', :value => @human_resource.id %>
+  <p>
+    <label for="business_partner_name">下流取引先</label><br />
+    <%= text_field_tag 'business_partner_name', @bp_member.business_partner.blank? ? "" : @bp_member.business_partner.business_partner_name, :readOnly => true, :style => "background-color: silver;", :size => 30 %>
+    <input type=button value='...' onClick="disp_wide('<%=url_for :controller => 'business_partner', :action => 'popup_list', :flg => 'down' %>');return false;" />
+    <input type=button value='クリア' onClick="clearBp();return false;" />
+  </p>
+  <p>
+    <label for="bp_pic_name">下流取引先担当</label><br />
+    <%= text_field_tag 'bp_pic_name', @bp_member.bp_pic.blank? ? "" : @bp_member.bp_pic.bp_pic_name, :readOnly => true, :style => "background-color: silver;", :size => 30 %>
+    <input type=button value='...' onClick="openBpPicList();return false;" />
+    <input type=button value='クリア' onClick="clearBpPic();return false;" />
+  </p>
+  <%= hidden_field 'bp_member', 'business_partner_id' %>
+
+<p><label for="bp_member_employment_type"><%=getLongName('bp_members','employment_type')%></label><br /><%= select 'bp_member', 'employment_type', $TYPE_CONDITIONS['employment_type'] %></p>
+
+<p><label for="bp_member_reprint_flg"><%=getLongName('bp_members','reprint_flg')%></label><br /><%= check_box 'bp_member', 'reprint_flg'  %></p>
+
+<p><label for="bp_member_race_condition"><%=getLongName('bp_members','race_condition')%></label><br /><%= text_field 'bp_member', 'race_condition'  %></p>
+
+<p><label for="bp_member_payment_memo"><%=getLongName('bp_members','payment_memo')%></label><br /><%= text_field 'bp_member', 'payment_memo'  %></p>
+
+<p><label for="bp_member_payment_min"><%=getLongName('bp_members','payment_min')%></label><br /><%= text_field 'bp_member', 'payment_min_view', :size => 6 %>万円</p>
+
+<p><label for="bp_member_time_adjust_term"><%=getLongName('bp_members','time_adjust_term')%></label><br /><%= text_field 'bp_member', 'time_adjust_term'  %></p>
+
+<p><label for="bp_member_memo"><%=getLongName('bp_members','memo')%></label><br /><%= resizable_area 'bp_member', 'memo'  %></p>
+
+<!--[eoform:bp_member]-->
+
+<%= hidden_field 'bp_member', 'lock_version' %>
+<%= hidden_field 'bp_member', 'bp_pic_id' %>
+<%= hidden_field 'bp_member', 'import_mail_id' %>
+
+<%= back_to_field_tag %>
+<script type="text/javascript">
+<!--
+function openBpPicList() {
+    disp_wide('<%=url_for :controller => 'bp_pic', :action => 'popup_list' %>' + '/' + document.getElementById("bp_member_business_partner_id").value)
+}
+
+document.setBp = function(bp) {
+    document.getElementById("bp_member_business_partner_id").value = bp.id;
+    document.getElementById("business_partner_name").value = bp.business_partner_name;
+    document.getElementById("bp_member_bp_pic_id").value = "";
+    document.getElementById("bp_pic_name").value = "";
+}
+
+function clearBp(){
+    document.getElementById("bp_member_business_partner_id").value = "";
+    document.getElementById("business_partner_name").value = "";
+    document.getElementById("bp_member_bp_pic_id").value = "";
+    document.getElementById("bp_pic_name").value = "";
+}
+
+document.setBpPic = function(bp_pic){
+    document.getElementById("bp_member_bp_pic_id").value = bp_pic.id;
+    document.getElementById("bp_pic_name").value = bp_pic.bp_pic_name;
+}
+
+function clearBpPic(){
+    document.getElementById("bp_member_bp_pic_id").value = "";
+    document.getElementById("bp_pic_name").value = "";
+}
+
+
+// -->
+</script>
+

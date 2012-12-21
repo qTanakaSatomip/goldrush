@@ -1,0 +1,98 @@
+<h1>夏期休暇設定</h1>
+<% form_tag :action => 'update_sv' do %>
+  <table class="show_table">
+    <tr >
+      <th align="center" style="width: 20%;">夏期休暇日数</th> 
+      <td style="width: 80%;"><%= text_field 'summer_vacation_day_total', 'day_total', :size => 10 %>日</td>
+    </tr>
+    <tr >
+      <th style="width: 15%;">夏期休暇取得期間</th> 
+      <td style="width: 15%;">
+        <%= date_field_tag 'summer_vacation_start_date', @start_date %>　～　
+        <%= date_field_tag 'summer_vacation_end_date', @end_date %>
+      </td>
+    </tr>
+  </table>
+    <p>
+      <%= submit_tag '夏期休暇の初期化', :method => :post, :onClick => "return confirm('上記内容で夏期休暇設定を初期化します。よろしいですか?') && validateDate($('#summer_vacation_start_date').val()) && validateDate($('#summer_vacation_end_date').val());" %>　
+      <%= submit_tag "　期間のみ変更　", :method => :post, :name => 'span_only', :onClick => "return confirm('夏期休暇取得期間のみを変更します。よろしいですか?') && validateDate($('#summer_vacation_start_date').val()) && validateDate($('#summer_vacation_end_date').val());" %>
+    </p>
+<% end %>
+
+<hr />
+<h1>現在夏期休暇取得状況</h1>
+<div>
+<b>
+夏期休暇取得期間：
+<%=h Configuration.get_summer_vacation_start_date.value1 %>　～　
+<%=h Configuration.get_summer_vacation_end_date.value1 %>
+</b>
+</div>
+<br />
+<div class="pagenate">
+<%= @user_pages.current.previous ? link_to('前のページ', { :page => @user_pages.current.previous }) : '前のページ' %>
+<%= @user_pages.current.next ? link_to('次のページ', { :page => @user_pages.current.next }) : '次のページ' %> 
+</div>
+
+<table class="list_table">
+  <tr >
+    <th align="center" style="width: 6%;">保険No.</th> 
+    <th style="width: 15%;">氏名</th> 
+    <th style="width: 15%;">夏期休暇日数</th> 
+    <th style="width: 15%;">夏期休暇使用済日数</th> 
+  </tr>
+  
+  <% for user in @users %>
+    <tr>
+      <td style="width: 6%;"><%=h user.employee.insurance_code.to_s %></td>
+      <td style="width: 15%;"><%=h user.employee.employee_name.to_s %></td>
+      <td align="center" style="width: 6%;"><%=h user.vacation.summer_vacation_day_total.to_i %>日</td>
+      <td align="center" style="width: 6%;"><%=h user.vacation.summer_vacation_used_total.to_i %>日</td>
+    </tr>
+  <% end %>
+</table>
+
+<br/>
+<div class="pagenate">
+<%= @user_pages.current.previous ? link_to('前のページ', { :page => @user_pages.current.previous }) : '前のページ' %>
+<%= @user_pages.current.next ? link_to('次のページ', { :page => @user_pages.current.next }) : '次のページ' %>
+</div>
+
+    <% if false %>
+
+        <th><%=getLongName('vacations','year')%></th> 
+        <th><%=getLongName('vacations','start_date')%></th> 
+        <th><%=getLongName('vacations','end_date')%></th> 
+        <th><%=getLongName('vacations','day_total')%></th> 
+        <th><%=getLongName('vacations','used_total')%></th> 
+        <th><%=getLongName('vacations','remain_total')%></th> 
+        <th>有休今期迄</th> 
+        <th><%=getLongName('vacations','life_plan_day_total')%></th> 
+        <th><%=getLongName('vacations','life_plan_used_total')%></th> 
+        <th><%=getLongName('vacations','life_plan_remain_total')%></th> 
+
+        <td align="center" style="width: 6%;"><%=h vacation.year %></td>
+        <td align="center" style="width: 10%;"><%=h vacation.start_date.to_date if vacation.start_date != nil %></td>
+        <td align="center" style="width: 10%;"><%=h vacation.end_date.to_date if vacation.end_date != nil %></td>
+        <td align="center" style="width: 6%;"><%=h vacation.day_total %></td>
+        <td align="center" style="width: 6%;"><%=h vacation.used_total %></td>
+        <td align="center" style="width: 6%;"><%=h vacation.remain_total %></td>
+        <td align="center" style="width: 6%;"><%=h vacation.cutoff_day_total %></td>
+        <td align="center" style="width: 6%;"><%=h vacation.life_plan_day_total %></td>
+        <td align="center" style="width: 6%;"><%=h vacation.life_plan_used_total %></td>
+        <td align="center" style="width: 6%;"><%=h vacation.life_plan_remain_total %></td>
+
+        <td>
+          <%= link_to '表示', :action => 'show', :id => vacation %>, 
+          <%= link_to '変更', :action => 'edit', :id => vacation %>, 
+          <%= link_to '削除', { :action => 'destroy', :id => vacation }, :confirm => 'この情報を削除します。よろしいですか?', :method => :post %>
+        </td>
+    <% end %>
+
+
+<br />
+<% if false %>
+<%= link_to (getLongName('table_name','vacations')+'の新規作成'), :action => 'new' %>
+<% end %>
+
+

@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/projects/!svn/ver/181/Applicative/GoldRush/develop/Base/app/views/vacation
+END
+list.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/projects/!svn/ver/103/Applicative/GoldRush/develop/Base/app/views/vacation/list.rhtml
+END
+show.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/projects/!svn/ver/103/Applicative/GoldRush/develop/Base/app/views/vacation/show.rhtml
+END
+_form.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/projects/!svn/ver/103/Applicative/GoldRush/develop/Base/app/views/vacation/_form.rhtml
+END
+annual_vacation.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/projects/!svn/ver/103/Applicative/GoldRush/develop/Base/app/views/vacation/annual_vacation.rhtml
+END
+list_sv.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/projects/!svn/ver/181/Applicative/GoldRush/develop/Base/app/views/vacation/list_sv.rhtml
+END
+edit.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/projects/!svn/ver/103/Applicative/GoldRush/develop/Base/app/views/vacation/edit.rhtml
+END
+new.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/projects/!svn/ver/103/Applicative/GoldRush/develop/Base/app/views/vacation/new.rhtml
+END

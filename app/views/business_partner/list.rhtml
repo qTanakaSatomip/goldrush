@@ -1,0 +1,130 @@
+<h1><%=getLongName('table_name','business_partners')%>一覧</h1>
+
+<% form_tag do %>
+<table>
+  <tr>
+    <td style="text-align: right">営業コード:</td>
+    <td><%= text_field_tag 'sales_code', session[:business_partner_search] && session[:business_partner_search][:sales_code] %>　</td>
+    <td style="text-align: right">取引先コード:</td>
+    <td><%= text_field_tag 'business_partner_code', session[:business_partner_search] && session[:business_partner_search][:business_partner_code] %></td>
+  </tr>
+  <tr>
+    <td style="text-align: right">取引先名（カナ）:</td>
+    <td><%= text_field_tag 'business_partner_name_kana', session[:business_partner_search] && session[:business_partner_search][:business_partner_name_kana] %></td>
+  </tr>
+  <% if !popup? %>
+    <tr>
+      <td style="text-align: right">フラグ:</td>
+      <td colspan = 3>
+        <%= check_box_tag 'self_flg', 1, session[:business_partner_search][:self_flg].to_i == 1 %> 自社　
+        <%= check_box_tag 'eu_flg', 1, session[:business_partner_search][:eu_flg].to_i == 1 %> エンドユーザ　
+        <%= check_box_tag 'upper_flg', 1, session[:business_partner_search][:upper_flg].to_i == 1 %> 上流　
+        <%= check_box_tag 'down_flg', 1, session[:business_partner_search][:down_flg].to_i == 1 %> 下流
+      </td>
+    </tr>
+  <% end %>
+</table>
+<p><%= submit_tag '　　検索　　', :name => 'search_button' %> <%= submit_tag '　　クリア　　', :name => 'clear_button' %></p>
+<br />
+<% end %>
+
+<%= put_paginates(@business_partner_pages, 'paginate', @business_partner_pages.item_count) %>
+
+<table class="list_table">
+  <tr>
+    <th><%=getShortName('business_partners', 'sales_code') %></th>
+    <th><%=getShortName('business_partners', 'business_partner_code') %></th>
+    <th><%=getShortName('business_partners', 'business_partner_short_name') %></th>
+    <th><%=getShortName('business_partners', 'self_flg') %></th>
+    <th><%=getShortName('business_partners', 'eu_flg') %></th>
+    <th><%=getShortName('business_partners', 'upper_flg') %></th>
+    <th><%=getShortName('business_partners', 'down_flg') %></th>
+  </tr>
+  
+<% for business_partner in @business_partners %>
+  <tr>
+    <th><%=h business_partner.sales_code %></th>
+    <td><%=h business_partner.business_partner_code %></td>
+<% if popup? %>
+  <% if params[:flg]=='eu' %>
+    <td><%= link_to h(business_partner.business_partner_short_name), '#', :onClick => "setEuBp(#{business_partner.id},'#{business_partner.business_partner_name}');return false;" %></td>
+  <% elsif params[:flg]=='mail' %>
+    <td><%= link_to h(business_partner.business_partner_short_name), '#', :onClick => "setBpFull(#{business_partner.id},'#{business_partner.business_partner_code}','#{business_partner.sales_management_code}','#{business_partner.business_partner_name}','#{business_partner.business_partner_short_name}','#{business_partner.business_partner_name_kana}','#{business_partner.business_partner_name_en}','#{business_partner.sales_status_type}','#{business_partner.ceo_name}','#{business_partner.url}','#{business_partner.zip}','#{business_partner.address1}','#{business_partner.address2}','#{business_partner.tel}','#{business_partner.fax}','#{business_partner.email}','#{business_partner.category}','#{business_partner.self_flg}','#{business_partner.eu_flg}','#{business_partner.upper_flg}','#{business_partner.down_flg}','#{business_partner.memo}');return false;" %></td>
+  <% else %>
+    <td><%= link_to h(business_partner.business_partner_short_name), '#', :onClick => "setBp(#{business_partner.id},'#{business_partner.business_partner_name}');return false;" %></td>
+  <% end %>
+<% else %>
+    <td><%=back_to_link h(business_partner.business_partner_short_name), :action => :show, :id => business_partner %></td>
+<% end %>
+    <td><%=h business_partner.self_flg %></td>
+    <td><%=h business_partner.eu_flg %></td>
+    <td><%=h business_partner.upper_flg %></td>
+    <td><%=h business_partner.down_flg %></td>
+  </tr>
+<% end %>
+</table>
+<%= put_paginates(@business_partner_pages, 'paginate', @business_partner_pages.item_count) %>
+
+<br />
+<%= link_to (getLongName('table_name','business_partners')+'/'+getLongName('table_name','bp_pics')+'の新規作成'), :action => 'new', :flg => params[:flg], :back_to => request.env['REQUEST_URI'] %>
+<% if popup? %>
+<script type="text/javascript">
+<!--
+function setBp(business_partner_id, business_partner_name) {
+  if(window.opener.document.setBp){
+    var bp = new Object();
+    bp.id = business_partner_id;
+    bp.business_partner_name = business_partner_name;
+    window.opener.document.setBp(bp);
+  }
+  window.close();
+}
+
+function setEuBp(business_partner_id, business_partner_name) {
+  if(window.opener.document.setEuBp){
+    var bp = new Object();
+    bp.id = business_partner_id;
+    bp.business_partner_name = business_partner_name;
+    window.opener.document.setEuBp(bp);
+  }
+  window.close();
+}
+
+function setBpFull(business_partner_id, business_partner_code, sales_management_code, business_partner_name, business_partner_short_name, business_partner_name_kana, business_partner_name_en, sales_status_type, ceo_name, url, zip, address1, address2, tel, fax, email, category, self_flg, eu_flg, upper_flg, down_flg, memo) {
+  if(window.opener.document.setBpFull){
+    var bp = new Object();
+    
+    bp.id = business_partner_id;
+    bp.business_partner_code = business_partner_code;
+    bp.sales_management_code = sales_management_code;
+    bp.business_partner_name = business_partner_name;
+    bp.business_partner_short_name = business_partner_short_name;
+    bp.business_partner_name_kana = business_partner_name_kana;
+    bp.business_partner_name_en = business_partner_name_en;
+    bp.sales_status_type = sales_status_type;
+    bp.ceo_name = ceo_name;
+    bp.url = url;
+    bp.zip = zip;
+    bp.address1 = address1;
+    bp.address2 = address2;
+    bp.tel = tel;
+    bp.fax = fax;
+    bp.email = email;
+    bp.category = category;
+    bp.self_flg = self_flg;
+    bp.eu_flg = eu_flg;
+    bp.upper_flg = upper_flg;
+    bp.down_flg = down_flg;
+    bp.memo = memo;
+    
+    window.opener.document.setBpFull(bp);
+  }
+  window.close();
+}
+
+// -->
+</script>
+<% end # if popup? %>
+
+
+

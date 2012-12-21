@@ -1,0 +1,58 @@
+<h1>取り込みメール詳細</h1>
+
+<%= link_to "照会作成", {:controller => 'analysis_template', :action => 'list', :mode => 'biz_offer', :import_mail_id => @import_mail}, :popup => ['new_window', 'height=800,width=900', 'scrollbars=yes'] %> | 
+<%= link_to "所属作成", {:controller => 'analysis_template', :action => 'list', :mode => 'bp_member', :import_mail_id => @import_mail}, :popup => ['new_window', 'height=800,width=900', 'scrollbars=yes'] %> | 
+<%= link_to "取引先作成", {:controller => 'business_partner', :action => 'new', :import_mail_id => @import_mail}, :popup => ['new_window', 'height=800,width=900', 'scrollbars=yes'] %>
+
+<table class="show_table">
+
+<tr>
+  <th><%= getLongName('import_mails', 'mail_sender_name') %></th><td><%=h @import_mail.mail_sender_name %></td>
+</tr>
+
+<tr>
+  <th><%= getLongName('import_mails', 'mail_to') %></th><td><%=h @import_mail.mail_to %></td>
+</tr>
+
+<tr>
+  <th><%= getLongName('import_mails', 'mail_cc') %></th><td><%=h @import_mail.mail_cc %></td>
+</tr>
+
+<tr>
+  <th><%= getLongName('import_mails', 'mail_bcc') %></th><td><%=h @import_mail.mail_bcc %></td>
+</tr>
+
+<tr>
+  <th><%= getLongName('import_mails', 'received_at') %></th><td><%=h @import_mail.received_at %></td>
+</tr>
+
+<tr>
+  <th><%= getLongName('import_mails', 'mail_subject') %></th><td><%=h @import_mail.mail_subject %></td>
+</tr>
+
+<tr>
+  <td colspan=2><%=simple_format h(@import_mail.mail_body) %></td>
+</tr>
+
+</table>
+
+<% if !@attachment_files.blank? %>
+  <p></p>
+  <h2>添付ファイル一覧</h2>
+  <%= render :partial => 'attachment_file/list' %>
+<% end %>
+
+<% if !@biz_offers.blank? %>
+  <p></p>
+  <h2><%=getLongName('table_name','biz_offers')%>一覧</h2>
+  <%= render :partial => 'biz_offer/list', :locals => {:biz_offers => @biz_offers} %>
+<% end %>
+
+<% if !@bp_members.blank? %>
+  <p></p>
+  <h2><%=getLongName('table_name','bp_members')%>一覧</h2>
+  <%= render :partial => 'bp_member/list', :locals => {:bp_members => @bp_members} %>
+<% end %>
+
+  <p></p>
+<%= link_or_back '戻る', :action => 'list' %>

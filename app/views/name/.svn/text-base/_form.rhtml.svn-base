@@ -1,0 +1,24 @@
+<%= error_messages_for 'name' %>
+
+<p><label for="name_id"><%= getLongName('names', 'id') %></label><br/>
+<%= @name.id || 'none' %></p>
+
+<!--[form:name]-->
+<p><label for="name_name_lcale"><%=getLongName('names','name_lcale')%></label><br /><%= text_field 'name', 'name_lcale'  %></p>
+<p><label for="name_name_section"><%=getLongName('names','name_section')%></label><br /><%= text_field 'name', 'name_section'  %></p>
+<p><label for="name_name_key"><%=getLongName('names','name_key')%></label><br /><%= text_field 'name', 'name_key'  %></p>
+<p><label for="name_long_name"><%=getLongName('names','long_name')%></label><br /><%= text_field 'name', 'long_name'  %></p>
+<p><label for="name_short_name"><%=getLongName('names','short_name')%></label><br /><%= text_field 'name', 'short_name'  %></p>
+<p><label for="name_other_name"><%=getLongName('names','other_name')%></label><br /><%= text_field 'name', 'other_name'  %></p>
+<p><label for="name_name_description"><%=getLongName('names','name_description')%></label><br /><%= text_field 'name', 'name_description'  %></p>
+<!--
+<p><label for="name_created_at"><%=getLongName('names','created_at')%></label><br /><%= datetime_select 'name', 'created_at'  %></p>
+<p><label for="name_updated_at"><%=getLongName('names','updated_at')%></label><br /><%= datetime_select 'name', 'updated_at'  %></p>
+<p><label for="name_lock_version"><%=getLongName('names','lock_version')%></label><br /><%= text_field 'name', 'lock_version'  %></p>
+<p><label for="name_created_user"><%=getLongName('names','created_user')%></label><br /><%= text_field 'name', 'created_user'  %></p>
+<p><label for="name_updated_user"><%=getLongName('names','updated_user')%></label><br /><%= text_field 'name', 'updated_user'  %></p>
+<p><label for="name_deleted"><%=getLongName('names','deleted')%></label><br /><%= text_field 'name', 'deleted'  %></p>
+-->
+<p><%= hidden_field 'name', 'lock_version'  %></p>
+<!--[eoform:name]-->
+

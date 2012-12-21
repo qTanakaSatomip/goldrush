@@ -1,0 +1,39 @@
+<h1><%=getLongName('table_name','configurations')%>一覧</h1>
+
+<div class="pagenate">
+<%= @configuration_pages.current.previous ? link_to('前のページ', { :page => @configuration_pages.current.previous }) : '前のページ' %>
+<%= @configuration_pages.current.next ? link_to('次のページ', { :page => @configuration_pages.current.next }) : '次のページ' %> 
+</div>
+
+<table class="list_table">
+  <tr>
+  <% for column in Configuration.columns %>
+    <% if system_column?(column.name) then next end %>
+    <th><%=getShortName('configurations', column.name)%></th>
+  <% end %>
+    <th></th>
+  </tr>
+  
+<% for configuration in @configurations %>
+  <tr>
+  <% for column in Configuration.columns %>
+    <% if system_column?(column.name) then next end %>
+    <td><%=h configuration.send(column.name) %></td>
+  <% end %>
+    <td>
+      <%= link_to '表示', :action => 'show', :id => configuration %>, 
+      <%= link_to '変更', :action => 'edit', :id => configuration %>, 
+      <%= link_to '削除', { :action => 'destroy', :id => configuration }, :confirm => 'この情報を削除します。よろしいですか?', :method => :post %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<div class="pagenate">
+<%= @configuration_pages.current.previous ? link_to('前のページ', { :page => @configuration_pages.current.previous }) : '前のページ' %>
+<%= @configuration_pages.current.next ? link_to('次のページ', { :page => @configuration_pages.current.next }) : '次のページ' %> 
+</div>
+
+<br />
+
+<%= link_to (getLongName('table_name','configurations')+'の新規作成'), :action => 'new' %>

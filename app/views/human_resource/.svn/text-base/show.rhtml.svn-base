@@ -1,0 +1,73 @@
+<table class="show_table">
+<tr>
+  <th><%= getLongName('human_resources', 'id') %></th><td><%=h @human_resource.id %></td>
+</tr>
+<tr>
+  <th><%= getLongName('human_resources', 'human_resource_name') %></th><td><%=h @human_resource.human_resource_name %></td>
+</tr>
+<tr>
+  <th><%= getLongName('human_resources', 'human_resource_short_name') %></th><td><%=h @human_resource.human_resource_short_name %></td>
+</tr>
+<tr>
+  <th><%= getLongName('human_resources', 'human_resource_name_kana') %></th><td><%=h @human_resource.human_resource_name_kana %></td>
+</tr>
+<tr>
+  <th><%= getLongName('human_resources', 'initial') %></th><td><%=h @human_resource.initial %></td>
+</tr>
+<tr>
+  <th><%= getLongName('human_resources', 'email') %></th><td><%=h @human_resource.email %></td>
+</tr>
+<tr>
+  <th><%= getLongName('human_resources', 'tel1') %></th><td><%=h @human_resource.tel1 %></td>
+</tr>
+<tr>
+  <th><%= getLongName('human_resources', 'tel2') %></th><td><%=h @human_resource.tel2 %></td>
+</tr>
+<tr>
+  <th><%= getLongName('human_resources', 'age') %></th><td><%=h @human_resource.age %></td>
+</tr>
+<tr>
+  <th><%= getLongName('human_resources', 'birthday_date') %></th><td><%=h @human_resource.birthday_date %></td>
+</tr>
+<tr>
+  <th><%= getLongName('human_resources', 'sex_type') %></th><td><%=h @human_resource.sex_type_name %></td>
+</tr>
+<tr>
+  <th><%= getLongName('human_resources', 'nationality') %></th><td><%=h @human_resource.nationality %></td>
+</tr>
+<tr>
+  <th><%= getLongName('human_resources', 'railroad') %></th><td><%=h @human_resource.railroad %></td>
+</tr>
+<tr>
+  <th><%= getLongName('human_resources', 'near_station') %></th><td><%=h @human_resource.near_station %></td>
+</tr>
+<tr>
+  <th><%= getLongName('human_resources', 'max_move_time') %></th><td><%=h @human_resource.max_move_time %></td>
+</tr>
+<tr>
+  <th><%= getLongName('human_resources', 'skill') %></th><td><%=h @human_resource.skill %></td>
+</tr>
+<tr>
+  <th><%= getLongName('human_resources', 'qualification') %></th><td><%=h @human_resource.qualification %></td>
+</tr>
+<tr>
+  <th><%= getLongName('human_resources', 'communication_type') %></th><td><%=h @human_resource.communication_type_name %></td>
+</tr>
+<tr>
+  <th><%= getLongName('human_resources', 'attendance') %></th><td><%=h @human_resource.attendance %></td>
+</tr>
+<tr>
+  <th><%= getLongName('human_resources', 'human_resource_status_type') %></th><td><%=h @human_resource.human_resource_status_type %></td>
+</tr>
+<tr>
+  <th><%= getLongName('human_resources', 'memo') %></th><td><%=h @human_resource.memo %></td>
+</tr>
+</table>
+<%= back_to_link '編集', :action => 'edit', :id => @human_resource %> |
+<%= link_or_back '戻る', :action => 'list' %>
+<p></p>
+
+<h2><%=getLongName('table_name','bp_members')%>一覧</h2>
+<%= render :partial => 'bp_member/list', :locals => {:human_resource => @human_resource, :business_partner => nil} %>
+
+

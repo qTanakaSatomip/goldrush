@@ -1,0 +1,2 @@
+module DailyWorkingHelper
+end

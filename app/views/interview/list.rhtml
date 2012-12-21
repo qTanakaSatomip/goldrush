@@ -1,0 +1,81 @@
+<h1><%=getLongName('table_name','interviews')%>一覧</h1>
+
+<%= put_paginates(@interview_pages, 'paginate', @interview_pages.item_count) %>
+
+<table class="list_table">
+  <tr>
+    <th><%=getShortName('interviews', 'id') %></th>
+
+    <th><%=getShortName('interviews', 'interview_status_type') %></th>
+
+    <th><%=getShortName('interviews', 'interview_number') %></th>
+
+    <th><%=getShortName('interviews', 'interview_appoint_at') %></th>
+
+    <th><%=getShortName('interviews', 'interview_prace') %></th>
+
+    <th><%=getShortName('interviews', 'succeed') %></th>
+
+    <th><%=getShortName('interviews', 'memo') %></th>
+
+    <th><%=getShortName('interviews', 'created_at') %></th>
+
+    <th><%=getShortName('interviews', 'updated_at') %></th>
+
+    <th><%=getShortName('interviews', 'lock_version') %></th>
+
+    <th><%=getShortName('interviews', 'created_user') %></th>
+
+    <th><%=getShortName('interviews', 'updated_user') %></th>
+
+    <th><%=getShortName('interviews', 'deleted_at') %></th>
+
+    <th><%=getShortName('interviews', 'deleted') %></th>
+
+    <th></th>
+  </tr>
+  
+<% for interview in @interviews %>
+  <tr>
+    <td><%=h interview.id %></td>
+
+    <td><%=h interview.interview_status_type %></td>
+
+    <td><%=h interview.interview_number %></td>
+
+    <td><%=h interview.interview_appoint_at %></td>
+
+    <td><%=h interview.interview_prace %></td>
+
+    <td><%=h interview.succeed %></td>
+
+    <td><%=h interview.memo %></td>
+
+    <td><%=h interview.created_at %></td>
+
+    <td><%=h interview.updated_at %></td>
+
+    <td><%=h interview.lock_version %></td>
+
+    <td><%=h interview.created_user %></td>
+
+    <td><%=h interview.updated_user %></td>
+
+    <td><%=h interview.deleted_at %></td>
+
+    <td><%=h interview.deleted %></td>
+
+    <td>
+      <%= link_to '詳細', :action => 'show', :id => interview %>, 
+      <%= link_to '変更', :action => 'edit', :id => interview %>, 
+      <%= link_to '削除', { :action => 'destroy', :id => interview }, :confirm => 'この情報を削除します。よろしいですか?', :method => :post %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<%= put_paginates(@interview_pages, 'paginate', @interview_pages.item_count) %>
+
+<br />
+
+<%= link_to (getLongName('table_name','interviews')+'の新規作成'), :action => 'new' %>

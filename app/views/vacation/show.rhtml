@@ -1,0 +1,44 @@
+<table class="show_table">
+
+<tr>
+  <th><%= getLongName('vacations', 'compensatory_hour_total') %></th><td><%=h @vacation.compensatory_hour_total %></td>
+</tr>
+
+<tr>
+  <th><%= getLongName('vacations', 'compensatory_used_total') %></th><td><%=h @vacation.compensatory_used_total %></td>
+</tr>
+
+<tr>
+  <th><%= getLongName('vacations', 'cutoff_compensatory_hour_total') %></th><td><%=h @vacation.cutoff_compensatory_hour_total %></td>
+</tr>
+
+<tr>
+  <th><%= getLongName('vacations', 'summer_vacation_day_total') %></th><td><%=h @vacation.summer_vacation_day_total %></td>
+</tr>
+
+<tr>
+  <th><%= getLongName('vacations', 'summer_vacation_used_total') %></th><td><%=h @vacation.summer_vacation_used_total %></td>
+</tr>
+
+<tr>
+  <th><%= getLongName('vacations', 'day_total') %></th><td><%=h @vacation.day_total %></td>
+</tr>
+
+<tr>
+  <th><%= getLongName('vacations', 'used_total') %></th><td><%=h @vacation.used_total %></td>
+</tr>
+
+<tr>
+  <th><%= getLongName('vacations', 'cutoff_day_total') %></th><td><%=h @vacation.cutoff_day_total %></td>
+</tr>
+
+<tr>
+  <th><%= getLongName('vacations', 'life_plan_day_total') %></th><td><%=h @vacation.life_plan_day_total %></td>
+</tr>
+
+<tr>
+  <th><%= getLongName('vacations', 'life_plan_used_total') %></th><td><%=h @vacation.life_plan_used_total %></td>
+</tr>
+</table>
+<%= link_to '編集', :action => 'edit', :id => @vacation, :back_to => params[:back_to] %> |
+<%= link_to '戻る', (params[:back_to] || {:action => 'list'}) %>

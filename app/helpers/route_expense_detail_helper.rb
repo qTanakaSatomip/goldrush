@@ -1,0 +1,2 @@
+module RouteExpenseDetailHelper
+end

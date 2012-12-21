@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/projects/!svn/ver/181/Applicative/GoldRush/develop/Base/app/views/account
+END
+view.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/projects/!svn/ver/103/Applicative/GoldRush/develop/Base/app/views/account/view.rhtml
+END
+list.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/projects/!svn/ver/103/Applicative/GoldRush/develop/Base/app/views/account/list.rhtml
+END
+mailsend.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/projects/!svn/ver/103/Applicative/GoldRush/develop/Base/app/views/account/mailsend.rhtml
+END
+list2.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/projects/!svn/ver/103/Applicative/GoldRush/develop/Base/app/views/account/list2.rhtml
+END
+activate.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/projects/!svn/ver/103/Applicative/GoldRush/develop/Base/app/views/account/activate.rhtml
+END
+show.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/projects/!svn/ver/103/Applicative/GoldRush/develop/Base/app/views/account/show.rhtml
+END
+_form.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/projects/!svn/ver/103/Applicative/GoldRush/develop/Base/app/views/account/_form.rhtml
+END
+forgot_password.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/projects/!svn/ver/103/Applicative/GoldRush/develop/Base/app/views/account/forgot_password.rhtml
+END
+update.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/projects/!svn/ver/103/Applicative/GoldRush/develop/Base/app/views/account/update.rhtml
+END
+signup.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/projects/!svn/ver/181/Applicative/GoldRush/develop/Base/app/views/account/signup.rhtml
+END
+_form_search.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/projects/!svn/ver/181/Applicative/GoldRush/develop/Base/app/views/account/_form_search.rhtml
+END
+edit_password.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/projects/!svn/ver/103/Applicative/GoldRush/develop/Base/app/views/account/edit_password.rhtml
+END
+index.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/projects/!svn/ver/103/Applicative/GoldRush/develop/Base/app/views/account/index.rhtml
+END
+login.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/projects/!svn/ver/103/Applicative/GoldRush/develop/Base/app/views/account/login.rhtml
+END

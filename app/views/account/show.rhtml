@@ -1,0 +1,308 @@
+﻿<h1>社員情報表示</h1>
+<h2>社員情報</h2>
+
+<table class="show_table">
+  <caption style="font-size:14px"><b>ログイン情報</b></caption>
+  <tr>
+    <th><%=getLongName('users','login')%></th>
+    <td><%= @user.login %></td>
+  </tr>
+  <tr>
+    <th><%=getLongName('users','access_level_type')%></th>
+    <td><%=h @user.access_level_type_long_name %></td>
+  </tr>
+  <tr>
+    <th>承認者権限</th>
+    <td><%= @user.employee.approver_flg == 1 ? '承認者':'非承認者' %></td>
+  </tr>
+</table>
+<br />
+
+<table class="show_table">
+<caption style="font-size:14px"><b>社員情報</b></caption>
+<tr>
+  <th><%=getLongName('employees','insurance_code')%></th>
+  <td><%=h @user.employee.insurance_code %></td>
+</tr>
+<tr>
+  <th><%=getLongName('employees','employee_name')%></th>
+  <td><%=h @user.employee.employee_name %></td>
+</tr>
+<tr>
+  <th><%=getLongName('employees','employee_kana_name')%></th>
+  <td><%=h @user.employee.employee_kana_name %></td>
+</tr>
+<tr>
+  <th>社員氏名略名</th>
+  <td><%=h @user.employee.employee_short_name %></td>
+</tr>
+<tr>
+  <th>部署</th>
+  <td><%=h @user.employee.department.department_name %></td>
+</tr>
+<tr>
+  <th><%=getLongName('employees','position')%></th>
+  <td><%=h @user.employee.position %></td>
+</tr>
+<tr>
+  <th><%=getLongName('employees','entry_date')%></th>
+  <td><%=h @user.employee.entry_date.to_date if @user.employee.entry_date != nil %></td>
+</tr>
+<tr>
+  <th><%=getLongName('employees','resignation_date')%></th>
+  <td><%=h @user.employee.resignation_date.to_date if @user.employee.resignation_date != nil %></td>
+</tr>
+<tr>
+  <th><%=getLongName('employees','resignation_reason')%></th>
+  <td><%=h @user.employee.resignation_reason %></td>
+</tr>
+<tr>
+  <th>日労働時間</th>
+  <td><%=h @user.employee.regular_working_hour %>時</td>
+</tr>
+<tr>
+  <th>休職日数合計</th>
+  <td><%=h @user.employee.leave_day.to_i %>日</td>
+</tr>
+<tr>
+  <th>職務経歴書1</th>
+  <td>
+  <% unless @user.employee.attached_file2.blank? %>
+    <%= link_to image_tag('pdf.png', :style => "border:0px;"), {:action => 'open_file_history1', :id => @user} %>
+  <% end %>
+  </td>
+</tr>
+<tr>
+  <th>職務経歴書2</th>
+  <td>
+  <% unless @user.employee.attached_file3.blank? %>
+    <%= link_to image_tag('pdf.png', :style => "border:0px;"), :action => 'open_file_history2', :id => @user %>
+  <% end %>
+  </td>
+</tr>
+<tr>
+  <th>職務経歴書3</th>
+  <td>
+  <% unless @user.employee.attached_file4.blank? %>
+    <%= link_to image_tag('pdf.png', :style => "border:0px;"), :action => 'open_file_history3', :id => @user %>
+  <% end %>
+  </td>
+</tr>
+  <tr>
+    <th>会社クレジットカード所有</th>
+    <td><%= @user.employee.credit_card_flg == 1 ? '有り':'無し' %></td>
+  </tr>
+</table>
+<br />
+
+<table class="show_table">
+<caption style="font-size:14px"><b>個人情報</b></caption>
+<tr>
+  <th><%=getLongName('employees','birthday_date')%></th>
+  <td><%=h @user.employee.birthday_date.to_date if @user.employee.birthday_date != nil %></td>
+</tr>
+<tr>
+  <th><%=getLongName('employees','sex_type')%></th>
+  <td><%=h @user.employee.sex_type_name %></td>
+</tr>
+<tr>
+  <th><%=getLongName('employees','email')%></th>
+  <td><%=h @user.employee.email %></td>
+</tr>
+<tr>
+  <th><%=getLongName('employees','zip1')%></th>
+  <td><%=h @user.employee.zip1 %></td>
+</tr>
+<tr>
+  <th><%=getLongName('employees','address1')%></th>
+  <td><%=h @user.employee.address1 %></td>
+</tr>
+<tr>
+  <th><%=getLongName('employees','tel1')%></th>
+  <td><%=h @user.employee.tel1 %></td>
+</tr>
+<tr>
+  <th><%=getLongName('employees','fax')%></th>
+  <td><%=h @user.employee.fax %></td>
+</tr>
+<tr>
+  <th><%=getLongName('employees','mobile')%></th>
+  <td><%=h @user.employee.mobile %></td>
+</tr>
+<tr>
+  <th><%=getLongName('employees','mobile_email')%></th>
+  <td><%=h @user.employee.mobile_email %></td>
+</tr>
+<tr>
+  <th><%=getLongName('employees','name2')%></th>
+  <td><%=h @user.employee.name2 %></td>
+</tr>
+<tr>
+  <th><%=getLongName('employees','zip2')%></th>
+  <td><%=h @user.employee.zip2 %></td>
+</tr>
+<tr>
+  <th><%=getLongName('employees','address2')%></th>
+  <td><%=h @user.employee.address2 %></td>
+</tr>
+<tr>
+  <th><%=getLongName('employees','tel2')%></th>
+  <td><%=h @user.employee.tel2 %></td>
+</tr>
+<tr>
+  <th><%=getLongName('employees','zip3')%></th>
+  <td><%=h @user.employee.zip3 %></td>
+</tr>
+<tr>
+  <th><%=getLongName('employees','address3')%></th>
+  <td><%=h @user.employee.address3 %></td>
+</tr>
+<tr>
+  <th><%=getLongName('employees','tel3')%></th>
+  <td><%=h @user.employee.tel3 %></td>
+</tr>
+<tr>
+  <th>写真</th>
+  <td>
+  <% unless @user.employee.attached_file1.blank? %>
+    <img src="<%= url_for :action => 'open_file_picture', :id => @user %>"
+  <% end %>
+  </td>
+</tr>
+</table>
+<br/>
+<table class="show_table">
+<caption style="font-size:14px"><b>銀行情報</b></caption>
+<tr>
+  <th><%=getLongName('employees','bank_name')%></th>
+  <td><%=h @user.employee.bank_name %></td>
+</tr>
+<tr>
+  <th><%=getLongName('employees','branch_name')%></th>
+  <td><%=h @user.employee.branch_name %></td>
+</tr>
+<tr>
+  <th><%=getLongName('employees','account_type')%></th>
+  <td><%=h @user.employee.account_type_name %></td>
+</tr>
+<tr>
+  <th><%=getLongName('employees','account_number')%></th>
+  <td><%=h @user.employee.account_number %></td>
+</tr>
+<tr>
+  <th><%=getLongName('employees','account_name')%></th>
+  <td><%=h @user.employee.account_name %></td>
+</tr>
+
+</table>
+<br/>
+<%= link_to '社員情報の編集', :action => 'update', :id => @user %>
+<br/>
+<h2><%=getLongName('table_name','route_expenses')%></h2>
+<table class="list_table">
+  <tr >
+    <th>No</th>
+    <th><%=getLongName('route_expense_details','station_from')%></th> 
+    <th><%=getLongName('route_expense_details','station_to')%></th> 
+    <th><%=getLongName('route_expense_details','monthly_amount')%></th> 
+    <th>経路メモ</th> 
+    <th>処理</th>
+  </tr>
+  
+<% @route_expense_details.each_index do |idx| route_expense_detail = @route_expense_details[idx] %>
+  <tr>
+    <td align="center"><%=h (idx+1) %></td>
+    <td ><%=h route_expense_detail.station_from %></td>
+    <td ><%=h route_expense_detail.station_to %></td>
+    <td align='right'><%=h route_expense_detail.monthly_amount.to_i %>円</td>
+    <td ><%= simple_format h(route_expense_detail.memo) %></td>
+    <td>
+      <%= link_to '表示' ,:controller => 'route_expense_detail', :action => 'show', :id => route_expense_detail, :back_to => request.env['REQUEST_URI'] %>, 
+      <%= link_to '変更' ,:controller => 'route_expense_detail', :action => 'edit', :id => route_expense_detail, :back_to => request.env['REQUEST_URI'] %>, 
+      <%= link_to '削除', {:controller => 'route_expense_detail', :action => 'destroy', :id => route_expense_detail, :back_to => request.env['REQUEST_URI'] }, :confirm => 'この情報を削除します。よろしいですか?', :method => :post %>
+    </td>
+  </tr>
+<% end %>
+  <tr style="background-color: #99DCDC">
+    <td colspan='4' align='center'>合計</td>
+    <td align='right'><%= @user.route_expense ? @user.route_expense.total_amount.to_i : 0 %>円</td>
+    <td align='center'> </td>
+  </tr>
+</table>
+<br/>
+<%= link_to (getLongName('table_name','route_expense_details')+'の新規作成'), :controller => 'route_expense_detail', :action => 'new', :id => @user %>
+<br/>
+<h2><%=getLongName('table_name','vacations')%></h2>
+<style type="text/css">
+<!--
+.vacation_table td {
+  text-align: right;
+}
+-->
+</style>
+<table class="show_table vacation_table" style="width: 50%">
+    <tr><th style="width:50%">代休積算時間</th>        <td style="width:50%"><%=h @user.vacation.compensatory_hour_total_format%></td></tr>
+    <tr><th>代休使用時間</th>        <td><%=h @user.vacation.compensatory_used_total_format%></td></tr>
+    <tr><th>代休今月迄</th>          <td><%=h @user.vacation.cutoff_compensatory_hour_total_format%></td></tr>
+    <tr><th>夏季休暇日数合計</th>    <td><%=h @user.vacation.summer_vacation_day_total%>日</td></tr>
+    <tr><th>夏季休暇使用日数</th>    <td><%=h @user.vacation.summer_vacation_used_total%>日</td></tr>
+    <tr><th>有休日数合計</th>        <td><%=h @user.vacation.day_total%>日</td></tr>
+    <tr><th>有休使用日数</th>        <td><%=h @user.vacation.used_total%>日</td></tr>
+    <tr><th>有休今期迄</th>          <td><%=h @user.vacation.cutoff_day_total%>日</td></tr>
+    <tr><th>ライフプラン休暇日数</th><td><%=h @user.vacation.life_plan_day_total%>日</td></tr>
+    <tr><th>ライフプラン使用日数</th><td><%=h @user.vacation.life_plan_used_total%>日</td></tr>
+</table>
+<br/>
+<% if false %>
+<h2><%=getLongName('table_name','employee_families')%></h2>
+<table class="list_table">
+  <tr >
+    <th>No</th>
+    <th>区分</th> 
+    <th><%=getLongName('employee_families','full_name')%></th> 
+    <th><%=getLongName('employee_families','relationship')%></th> 
+    <th><%=getLongName('employee_families','birthday_date')%></th> 
+    <th>老人控除対象配偶者<br/>
+     又は老人扶養親族
+     </th> 
+    <th><%=getLongName('employee_families','supporting_relative')%></th> 
+    <th><%=getLongName('employee_families','occupation')%></th> 
+    <th>住所<br/>
+     又は居所
+     </th> 
+    <th>所得の見積額
+    </th> 
+    <th>異動月日<br/>
+    及び事由</th> 
+    <th>障害者等</th> 
+    <th>左記の内容</th> 
+    <th>処理</th>
+  </tr>
+  
+<% @employee_families.each_index do |idx| employee_family = @employee_families[idx] %>
+  <tr>
+    <td align="center"><%=h (idx+1) %></td>
+    <td ><%=h employee_family.relative_status_type_long_name %></td>
+    <td ><%=h employee_family.full_name %></td>
+    <td ><%=h employee_family.relationship %></td>
+    <td align="center"><%=h employee_family.birthday_date.to_date if employee_family.birthday_date != nil %></td>
+    <td align="center"><%=h employee_family.get_living_type_name %></td>
+    <td align="center"><%=h employee_family.supporting_relative == 1 ? "○" : "" %></td>
+    <td ><%=h employee_family.occupation %></td>
+    <td ><%=h employee_family.address %></td>
+    <td ><%=h employee_family.income_amount.to_i %></td>
+    <td ><%=h employee_family.change_date_reason %></td>
+    <td> </td>
+    <td> </td>
+    <td>
+      <%= link_to '表示', :controller => 'employee_family', :action => 'show', :id => employee_family %>, 
+      <%= link_to '変更', :controller => 'employee_family', :action => 'edit', :id => employee_family %>, 
+      <%= link_to '削除', { :controller => 'employee_family', :action => 'destroy', :id => employee_family }, :confirm => 'この情報を削除します。よろしいですか?', :method => :post %>
+    </td>
+  </tr>
+<% end %>
+</table>
+<br />
+<%= link_to (getLongName('table_name','employee_families')+'の新規作成'), :controller => 'employee_family', :action => 'new', :id => @user %>
+<br/>
+<% end # if fasle %>
