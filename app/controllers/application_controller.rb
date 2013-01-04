@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
   end 
 
   def paginate(table_name, param_map)
-    [[], eval(:users.to_s.classify).select(params[:select]).includes(params[:include]).where(param_map[:conditions]).order(param_map[:order]).per(param_map[:per]).page(params[:page])]
+    [[], eval(table_name.to_s.classify).select(params[:select]).includes(params[:include]).where(param_map[:conditions]).order(param_map[:order]).page(params[:page]).per(param_map[:per])]
   end
 
   def rescue_action_in_public(exception)

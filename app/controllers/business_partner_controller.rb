@@ -160,11 +160,11 @@ class BusinessPartnerController < ApplicationController
         mail_flg = true
       else
         @business_partner = BusinessPartner.new(params[:business_partner])
-        @business_partner.sales_code = Configuration.get_seq_0('sales_code', 5)
+        @business_partner.sales_code = SysConfig.get_seq_0('sales_code', 5)
       end
 
       if @business_partner.sales_management_code.blank?
-        @business_partner.sales_management_code = Configuration.get_seq_0('sales_management_code', 5)
+        @business_partner.sales_management_code = SysConfig.get_seq_0('sales_management_code', 5)
       end
       @business_partner.business_partner_name = space_trim(params[:business_partner][:business_partner_name])
       set_user_column @business_partner
