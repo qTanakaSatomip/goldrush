@@ -329,9 +329,6 @@ class AccountController < ApplicationController
 
     cond = make_conditions
     @employee_pages, @employees = paginate(:employees, cond)
-    #@user_pages, @users = paginate(:users, :per_page => 50, :include => [ :employee], :conditions => ["users.deleted = 0 and employees.deleted = 0 and employees.resignation_date is null"], :order => "users.id")
-    #@employee_pages, @employees = paginate(:employees, :per_page => 50, :include => [ :user, :department ], :conditions => ["users.deleted = 0 and employees.deleted = 0 and employees.resignation_date is null"], :order => "users.id")
-    #@employee_pages, @employees = paginate(:employees, :per_page => 50, :include => [ :user, :department ], :conditions => ["users.deleted = 0 and employees.deleted = 0"], :order => "users.id")
   end
 
   def list2

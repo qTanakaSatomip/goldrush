@@ -23,7 +23,7 @@ class BusinessPartnerController < ApplicationController
 
   def make_conditions
     param = []
-    include = []
+    incl = []
     sql = "business_partners.deleted = 0"
     order_by = ""
 
@@ -58,7 +58,8 @@ class BusinessPartnerController < ApplicationController
       sql += " and down_flg = 1"
     end
 
-    return {:conditions => param.unshift(sql), :include => include, :per_page => current_user.per_page}
+    #return {:conditions => param.unshift(sql), :include => include, :per_page => current_user.per_page}
+    return [param.unshift(sql), incl]
   end
 
 # 1 = 1 or self_flg = ? or eu_flg = ? or upper_flg = ? or down_flg = ?
@@ -86,11 +87,12 @@ class BusinessPartnerController < ApplicationController
 
     sql += ")"
 
-    return {:conditions => param.unshift(sql), :per_page => current_user.per_page}
+    return param.unshift(sql)
   end
 
   def list
     session[:business_partner_search] ||= {}
+    incl = []
     if flg = params[:flg]
       if flg == 'eu'
         cond = make_popup_conditions(0,1,0,0)
@@ -114,10 +116,10 @@ class BusinessPartnerController < ApplicationController
           session[:business_partner_search] = {}
         end
       end
-      cond = make_conditions
+      cond, incl = make_conditions
     end
     #@business_partner_pages, @business_partners = paginate(:business_partners, cond)
-    @business_partners = BusinessPartner.find(cond).page(params[:page]).per(current_user.per_page)
+    @business_partners = BusinessPartner.includes(incl).where(cond).page(params[:page]).per(current_user.per_page)
   end
 
   def show

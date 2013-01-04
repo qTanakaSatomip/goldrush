@@ -37,6 +37,14 @@ class ApplicationController < ActionController::Base
     current_auth
   end
 
+  def self.verify(param)
+    #dummy
+  end 
+
+  def paginate(table_name, param_map)
+    [[], eval(:users.to_s.classify).select(params[:select]).includes(params[:include]).where(param_map[:conditions]).order(param_map[:order]).per(param_map[:per]).page(params[:page])]
+  end
+
   def rescue_action_in_public(exception)
     case exception
       when ValidationAbort
