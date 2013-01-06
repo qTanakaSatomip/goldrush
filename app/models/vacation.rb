@@ -17,6 +17,10 @@ class Vacation < ActiveRecord::Base
     self.compensatory_hour_total - self.compensatory_used_total
   end
 
+  def calHourMinuteFormatJa(sec)
+    DateTimeUtil.calHourMinuteFormatJa(sec)
+  end
+
   def compensatory_remain_total_format
     calHourMinuteFormatJa(compensatory_remain_total)
   end
