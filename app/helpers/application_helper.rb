@@ -134,7 +134,7 @@ EOS
          });
        </script>
 EOS
-    return result;
+    return raw result;
   end
 
   def datetime_field(object_name, method, options = {})
