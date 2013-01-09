@@ -92,7 +92,7 @@ class MonthlyWorking < ActiveRecord::Base
   end
   
   def real_working_hour_format
-    calHourMinuteFormatJa(self.real_working_second_count)
+    DateTimeUtil.calHourMinuteFormatJa(self.real_working_second_count)
   end
   
   def get_labor_working_hour_count

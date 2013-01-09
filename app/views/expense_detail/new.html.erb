@@ -9,7 +9,7 @@ var submit_flg = false;
 </p>
 
 <% # form_tag({:action => 'create', :id => params[:id], :user_id => params[:user_id]}, :onSubmit => "disableSubmit(this);") do %>
-<% form_tag({:action => 'create', :id => params[:id], :user_id => params[:user_id]}, :onSubmit => "if (submit_flg) return false; submit_flg = true;") do %>
+<%= form_tag({:action => 'create', :id => params[:id], :user_id => params[:user_id]}, :onSubmit => "if (submit_flg) return false; submit_flg = true;") do %>
   <%= submit_tag "登録", :name => "entry" %>
   <%= render :partial => 'form' %>
   <br/>

@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 class AccountController < ApplicationController
+  before_filter :authenticate_auth!
 #  skip_before_filter :login_required, :only => [:login, :activate, :activate_recv_mail, :mailsend, :forgot_password]
 #  before_filter :personnel_department_required, :only => [:list, :view, :destroy, :signup]
 

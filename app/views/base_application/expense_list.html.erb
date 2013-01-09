@@ -1,6 +1,6 @@
 <h1><%=getLongName('table_name','expense_applications')%>一覧</h1>
 <%= link_to('謝礼申請一覧', :controller => :expense_application, :action => :fee_list, :payment_flg => '0') %>
-<% form_tag :action => 'do_search', :mode => params[:mode], :by_approver => params[:by_approver] do %>
+<%= form_tag :action => 'do_search', :mode => params[:mode], :by_approver => params[:by_approver] do %>
   <%= render :partial => 'form_search' %>  
 <% end %>
 

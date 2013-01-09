@@ -11,6 +11,9 @@
  *= require_self
  *= require_tree .
  */
+div#main_box {
+  padding-top: 50px;
+}
 div.search_form {
 }
 div.search_form table {

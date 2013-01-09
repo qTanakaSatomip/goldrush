@@ -10,7 +10,7 @@
   <% end %>
 <% end %>
 
-<% form_tag :action => 'update', :id => @daily_working, :back_to => params[:back_to] do %>
+<%= form_tag :action => 'update', :id => @daily_working, :back_to => params[:back_to] do %>
   <%= render :partial => 'form' %>
   <% unless @daily_working.monthly_working_applicated? %>
     <%= submit_tag '更新', :onclick => "return validateTime($('daily_working_in_time').val()) && validateTime($('daily_working_out_time').val()) && validateTime($('daily_working_rest_hour').val());" %>

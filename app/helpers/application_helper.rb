@@ -287,12 +287,12 @@ EOS
 
   def resizable_area(object_name, method, options = {})
     options[:size] = '45x3' if options[:size].blank?
-    put_textarea_size_change(object_name + '_' + method) + "<br/>\n" + text_area(object_name, method, options)
+    raw(put_textarea_size_change(object_name + '_' + method) + "<br/>\n" + text_area(object_name, method, options))
   end
 
   def resizable_area_tag(name, value = nil, options = {})
     options[:size] = '45x3' if options[:size].blank?
-    put_textarea_size_change(name) + "<br/>\n" + text_area_tag(name, value, options)
+    raw(put_textarea_size_change(name) + "<br/>\n" + text_area_tag(name, value, options))
   end
 
   
@@ -301,7 +301,7 @@ EOS
   end
 
   def money_format(num)
-    return StringUtil.money_format(num)
+    return (num.to_s =~ /[-+]?\d{4,}/) ? (num.to_s.reverse.gsub(/\G((?:\d+\.)?\d{3})(?=\d)/, '\1,').reverse) : num.to_s
   end
   
   def link_and_if(condition, name, options = {}, html_options = {}, &block)
@@ -312,7 +312,7 @@ EOS
     end
   end
 
-  def link_to_popup(name, options = {}, html_options = {}, &block)
+  def link_to_popup_mode(name, options = {}, html_options = {}, &block)
     if @popup_mode
       unless action = options[:action]
         action = controller.action_name

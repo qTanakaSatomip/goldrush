@@ -1,6 +1,6 @@
 <h1>勤怠申請一覧</h1>
 
-<% form_tag :action => 'do_search', :mode => params[:mode], :by_approver => params[:by_approver] do %>
+<%= form_tag :action => 'do_search', :mode => params[:mode], :by_approver => params[:by_approver] do %>
   <%= render :partial => 'form_search' %>  
 <% end %>
 
