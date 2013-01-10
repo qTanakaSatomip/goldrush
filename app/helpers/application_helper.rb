@@ -314,10 +314,11 @@ EOS
 
   def link_to_popup_mode(name, options = {}, html_options = {}, &block)
     if @popup_mode
-      unless action = options[:action]
-        action = controller.action_name
-      end
-      options[:action] = "popup_#{action}" unless action.to_s.match(/^popup_/)
+#      unless action = options[:action]
+#        action = controller.action_name
+#      end
+#      options[:action] = "popup_#{action}" unless action.to_s.match(/^popup_/)
+      options[:popup] = 1
     end
     link_to(name, options, html_options, &block)
   end

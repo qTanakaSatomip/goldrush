@@ -6,6 +6,7 @@
 
 class ApplicationController < ActionController::Base
   before_filter :set_gettext_locale
+  before_filter :check_popup_mode
   protect_from_forgery
   helper :all # include all helpers, all the time
 
@@ -135,6 +136,10 @@ class ApplicationController < ActionController::Base
       model.created_user = default_user if model.new_record?
       model.updated_user = default_user
     end
+  end
+
+  def check_popup_mode
+    @popup_mode = params[:popup]
   end
 
 =begin

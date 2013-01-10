@@ -2,7 +2,7 @@
 <div class="pagenate">
 <%= @base_month.last_month ? link_to('前の月', {:action => :list, :id => @base_month.last_month.id, :user_id => params[:user_id]}) : '前の月' %>
 <%= @base_month.next_month ? link_to('次の月', {:action => :list, :id => @base_month.next_month.id, :user_id => params[:user_id]}) : '次の月' %>
-<%- url = url_for(:controller => :monthly_working, :action => :popup_list, :id => @base_month.id, :user_id => params[:user_id]) -%>
+<%- url = url_for(:controller => :monthly_working, :action => :list, :popup => 1, :id => @base_month.id, :user_id => params[:user_id]) -%>
 <%= link_to('勤務表', "#", :onClick => "disp_wide('#{url}');return false;") %>
 </div>
 
