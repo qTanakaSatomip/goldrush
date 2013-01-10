@@ -191,7 +191,7 @@ EOS
        });
       </script>
 EOS
-    return result;
+    return raw result;
 
   end
 
@@ -403,11 +403,6 @@ EOS
 
   def request_url
     request.env['REQUEST_URI']
-  end
-
-  def back_to_link(name, options = {}, html_options = {}, &block)
-    options[:back_to] = request_url
-    link_to(name, options, html_options, &block)
   end
 
   def link_or_back(name, options = {}, html_options = {}, &block)

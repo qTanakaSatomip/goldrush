@@ -116,6 +116,7 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">マスター管理<b class="caret"></b></a>
             <ul class="dropdown-menu">
+              <li><%= link_to 'ユーザー', users_path %></li>
               <li><%= link_to '部署', :controller => :department, :action => :list %></li>
               <li><%= link_to '祝日設定', :controller => :base_date, :action => :list %></li>
               <li><%= link_to '承認権限設定', :controller => :approval_authority, :action => :report_xxx %></li>
