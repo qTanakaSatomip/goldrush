@@ -29,10 +29,7 @@
 </b>
 </div>
 <br />
-<div class="pagenate">
-<%= @user_pages.current.previous ? link_to('前のページ', { :page => @user_pages.current.previous }) : '前のページ' %>
-<%= @user_pages.current.next ? link_to('次のページ', { :page => @user_pages.current.next }) : '次のページ' %> 
-</div>
+<%= paginate(@users) %>
 
 <table class="list_table">
   <tr >
@@ -53,10 +50,7 @@
 </table>
 
 <br/>
-<div class="pagenate">
-<%= @user_pages.current.previous ? link_to('前のページ', { :page => @user_pages.current.previous }) : '前のページ' %>
-<%= @user_pages.current.next ? link_to('次のページ', { :page => @user_pages.current.next }) : '次のページ' %>
-</div>
+<%= paginate(@users) %>
 
     <% if false %>
 

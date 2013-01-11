@@ -26,10 +26,7 @@
 <p><input name="edit_type" type="hidden" value="<%= params[:edit_type] %>" /></p>
 <% end %>
 
-<div class="pagenate">
-<%= !@base_applications.first_page? ? link_to('前のページ', { :page => @base_applications.current_page - 1}) : '前のページ' %>
-<%= !@base_applications.last_page? ? link_to('次のページ', { :page => @base_application_pages.current_page + 1}) : '次のページ' %> 
-</div>
+<%= paginate(@base_applications) %>
 <%= form_tag({:action => :payment, :back_to => request.env['REQUEST_URI']}, :id => 'list_form') do %>
 <table class="list_table">
   <tr>

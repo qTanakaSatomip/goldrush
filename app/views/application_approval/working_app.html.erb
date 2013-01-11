@@ -21,10 +21,7 @@
   <%= render :partial => 'form_search' %>  
 <% end %>
 
-<div class="pagenate">
-<%= @application_approval_pages.current.previous ? link_to('前のページ', { :page => @application_approval_pages.current.previous, :edit_type => @edit_type }) : '前のページ' %>
-<%= @application_approval_pages.current.next ? link_to('次のページ', { :page => @application_approval_pages.current.next, :edit_type => @edit_type }) : '次のページ' %> 
-</div>
+<%= paginate(@application_approvals) %>
 
 <table class="list_table">
   <tr>
@@ -168,10 +165,7 @@
 </table>
 <br>
 
-<div class="pagenate">
-<%= @application_approval_pages.current.previous ? link_to('前のページ', { :page => @application_approval_pages.current.previous }) : '前のページ' %>
-<%= @application_approval_pages.current.next ? link_to('次のページ', { :page => @application_approval_pages.current.next }) : '次のページ' %> 
-</div>
+<%= paginate(@application_approvals) %>
 
 <br />
 

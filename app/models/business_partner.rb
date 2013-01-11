@@ -23,7 +23,7 @@ class BusinessPartner < ActiveRecord::Base
     self.sales_code + " " + business_partner_name
   end
 
-  def BusinessPartner.immport_from_csv(filename)
+  def BusinessPartner.immport_from_csv(filename, prodmode=false)
     ActiveRecord::Base.transaction do
     require 'csv'
     companies = {}
@@ -32,6 +32,11 @@ class BusinessPartner < ActiveRecord::Base
       break if row[0].blank?
       a,b = row[2].split("　")
       a.strip!
+      email = if prodmode
+        row[0]
+      else
+        "test+" + row[0].sub("@","_") + "@i.applicative.jp"
+      end
       unless companies[a.upcase]
         bp = BusinessPartner.new
         bp.business_partner_name = a
@@ -41,7 +46,7 @@ class BusinessPartner < ActiveRecord::Base
 	bp.upper_flg = row[8].to_i
 	bp.down_flg = row[9].to_i
 	if row[1].include?('担当者')
-          bp.email = row[0]
+          bp.email = email
 	end
 	bp.created_user = 'import'
 	bp.updated_user = 'import'
@@ -60,7 +65,7 @@ class BusinessPartner < ActiveRecord::Base
         pic.bp_pic_name = name
         pic.bp_pic_short_name = name
         pic.bp_pic_name_kana = name
-        pic.email1 = row[0]
+        pic.email1 = email
         pic.created_user = 'import'
         pic.updated_user = 'import'
         pic.save!

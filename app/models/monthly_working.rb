@@ -113,7 +113,7 @@ class MonthlyWorking < ActiveRecord::Base
   end
   
   def format_hour_minute(sec)
-    return calHourMinuteFormat(sec)
+    return DateTimeUtil.calHourMinuteFormat(sec)
   end
   
   def total_latearly_count

@@ -4,10 +4,7 @@
   <%= render :partial => 'form_search' %>  
 <% end %>
 
-<div class="pagenate">
-<%= @base_application_pages.current.previous ? link_to('前のページ', { :page => @base_application_pages.current.previous}) : '前のページ' %>
-<%= @base_application_pages.current.next ? link_to('次のページ', { :page => @base_application_pages.current.next}) : '次のページ' %> 
-</div>
+<%= paginate(@base_applications) %>
 
 <table class="list_table">
   <tr>

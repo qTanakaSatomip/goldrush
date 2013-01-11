@@ -412,4 +412,9 @@ EOS
   def back_to_field_tag
     params[:back_to].blank? ? "" : hidden_field_tag('back_to', params[:back_to]) 
   end
+
+  def calHourMinuteFormat(sec)
+    require 'date_time_util'
+    DateTimeUtil.calHourMinuteFormat(sec)
+  end	
 end
