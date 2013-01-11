@@ -12,7 +12,7 @@ class ExpenseApplicationController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @expense_application_pages, @expense_applications = paginate (:expense_applications, :per_page => 30, :conditions => ["deleted = 0 and user_id = ?", current_user.id], :order => "application_date DESC")
+    @expense_application_pages, @expense_applications = paginate(:expense_applications, :per_page => 30, :conditions => ["deleted = 0 and user_id = ?", current_user.id], :order => "application_date DESC")
   end
 
 

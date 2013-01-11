@@ -19,7 +19,7 @@
 
 <% @base_applications.each_index do |idx| base_application = @base_applications[idx] %>
   <tr >
-    <td align="center"><%=h params[:page]? ((params[:page].to_i-1) * Configuration.get_per_page_count).to_i+idx+1 : idx+1 %></td>
+    <td align="center"><%=h params[:page]? ((params[:page].to_i-1) * SysConfig.get_per_page_count).to_i+idx+1 : idx+1 %></td>
     <td style="width: 20%;"><%=h base_application.user.employee.employee_name %></td>
 
     <% if base_application.application_type == 'holiday_app' %>

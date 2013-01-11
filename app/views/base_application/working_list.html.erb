@@ -22,7 +22,7 @@
     <% next if base_application.application_type == 'weekly_report_app' && !base_application.weekly_report %>
 
   <tr >
-    <td align="center"><%=h params[:page]? ((params[:page].to_i-1) * Configuration.get_per_page_count).to_i+idx+1 : idx+1 %></td>
+    <td align="center"><%=h params[:page]? ((params[:page].to_i-1) * SysConfig.get_per_page_count).to_i+idx+1 : idx+1 %></td>
     <td style="width: 15%;"><%=h base_application.user.employee.employee_name %></td>
 
     <% if base_application.application_type == 'holiday_app' %>

@@ -4,7 +4,7 @@
 
 <table class="list_table">
   <tr>
-  <% for column in Configuration.columns %>
+  <% for column in SysConfig.columns %>
     <% if system_column?(column.name) then next end %>
     <th><%=getShortName('configurations', column.name)%></th>
   <% end %>
@@ -13,7 +13,7 @@
   
 <% for configuration in @configurations %>
   <tr>
-  <% for column in Configuration.columns %>
+  <% for column in SysConfig.columns %>
     <% if system_column?(column.name) then next end %>
     <td><%=h configuration.send(column.name) %></td>
   <% end %>
