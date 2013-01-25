@@ -25,18 +25,29 @@ class BusinessPartner < ActiveRecord::Base
 
   def BusinessPartner.export_to_csv
     csv_data = []
-    csv_data << "e-mail,Name,ZipCode,Prefecture,Address,Tel,Birthday,Occupation,案件,人材, bp_id, bp_pic_id"
+    csv_data << "e-mail,Name,ZipCode,Prefecture,Address,Tel,Birthday,Occupation,案件,人材, bp_id, bp_pic_id,担当グループ"
     BpPic.all.each do |x|
       csv_data << [x.email1, x.bp_pic_name,x.business_partner.business_partner_name, "", "", "", "", "", x.business_partner.down_flg, x.business_partner.upper_flg, x.business_partner.id, x.id].join(',')
     end
-    return csv_data.join("\n")
+    return csv_data.join("\n").force_encoding("Shift_JIS")
   end
 
   def BusinessPartner.import_from_csv(filename, prodmode=false)
+    File.open(filename, "r"){|file| import_from_csv_data(file, prodmode)}
+  end
+
+  def BusinessPartner.import_from_csv_data(readable_data, prodmode=false)
     ActiveRecord::Base.transaction do
     require 'csv'
     companies = {}
-    CSV.read(filename).each do |row|
+    pics = {}
+    BusinessPartner.all.each do |x|
+      companies[x.business_partner_name] = [x, []]
+    end
+    BpPic.all.each do |y|
+      pics[y.bp_pic_name] = [y]
+    end
+    CSV.parse(readable_data.force_encoding("UTF-8")).each do |row|
       next if row[0] == 'e-mail'
       break if row[0].blank?
       a,b = row[2].split("　")
@@ -61,6 +72,16 @@ class BusinessPartner < ActiveRecord::Base
 	bp.updated_user = 'import'
 	bp.save!
 	companies[a.upcase] = [bp, []]
+      else
+        if row[10].blank?
+          break
+        else
+          # update
+          update_business_partner = BusinessPartner.where(:business_partner_name => a).first
+          update_business_partner.down_flg = row[8].to_i
+          update_business_partner.upper_flg = row[9].to_i
+          update_business_partner.save!
+        end
       end
       pic = BpPic.new
       pic.business_partner_id = companies[a.upcase][0].id
@@ -68,6 +89,9 @@ class BusinessPartner < ActiveRecord::Base
         $1
       else
         row[1]
+      end
+      if pics[name]
+        companies[a.upcase][1] << name
       end
       unless companies[a.upcase][1].include? name
         companies[a.upcase][1] << name
@@ -78,6 +102,16 @@ class BusinessPartner < ActiveRecord::Base
         pic.created_user = 'import'
         pic.updated_user = 'import'
         pic.save!
+      else
+        if row[11].blank?
+          break
+        else
+          # update
+          update_bp_pic = BpPic.where(:bp_pic_name => name).first
+          update_bp_pic.email1 = row[0]
+          update_bp_pic.business_partner_id = row[10].to_i
+          update_bp_pic.save!
+        end
       end
       end
     end
