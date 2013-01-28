@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+require 'nkf'
 class BusinessPartner < ActiveRecord::Base
   before_create :set_default
   include AutoTypeName
@@ -26,12 +27,11 @@ class BusinessPartner < ActiveRecord::Base
   def BusinessPartner.export_to_csv
     csv_data = []
     csv_data << "e-mail,Name,ZipCode,Prefecture,Address,Tel,Birthday,Occupation,案件,人材, bp_id, bp_pic_id,担当グループ"
-    BpPic.all.each do |x|
+    BpPic.limit(3).each do |x|
       csv_data << [x.email1, x.bp_pic_name,x.business_partner.business_partner_name, "", "", "", "", "", x.business_partner.down_flg, x.business_partner.upper_flg, x.business_partner.id, x.id].join(',')
     end
-    return csv_data.join("\n").force_encoding("Shift_JIS")
+    return NKF.nkf("-s", csv_data.join("\n"))
   end
-
   def BusinessPartner.import_from_csv(filename, prodmode=false)
     File.open(filename, "r"){|file| import_from_csv_data(file, prodmode)}
   end
@@ -41,17 +41,22 @@ class BusinessPartner < ActiveRecord::Base
     require 'csv'
     companies = {}
     pics = {}
+    pic_groups = {}
     BusinessPartner.all.each do |x|
-      companies[x.business_partner_name] = [x, []]
+      companies[x.business_partner_name.upcase] = [x, []]
     end
     BpPic.all.each do |y|
       pics[y.bp_pic_name] = [y]
     end
-    CSV.parse(readable_data.force_encoding("UTF-8")).each do |row|
+    BpPicGroup.all.each do |z|
+      pic_groups[z.bp_pic_group_name] = [z]
+    end
+    CSV.parse(NKF.nkf("-w", readable_data)).each do |row|
       next if row[0] == 'e-mail'
       break if row[0].blank?
       a,b = row[2].split("　")
       a.strip!
+      c = row[12]
       email = if prodmode
         row[0]
       else
@@ -63,7 +68,7 @@ class BusinessPartner < ActiveRecord::Base
         bp.business_partner_short_name = a
         bp.business_partner_name_kana = a
         bp.sales_status_type = 'prospect'
-	bp.upper_flg = row[8].to_i
+        bp.upper_flg = row[8].to_i
 	bp.down_flg = row[9].to_i
 	if row[1].include?('担当者')
           bp.email = email
@@ -113,7 +118,31 @@ class BusinessPartner < ActiveRecord::Base
           update_bp_pic.save!
         end
       end
+      unless pic_groups[c]
+        gr = BpPicGroup.new
+        gr.bp_pic_group_name = c
+        gr.created_user = 'import'
+        gr.updated_user = 'import'
+        gr.save!
+        pic_groups[c] = [gr]
+      end
+      db_bp_pic = BpPic.where(:bp_pic_name => name).first
+      db_pic_group = BpPicGroup.where(:bp_pic_group_name => c).first
+      db_bp_pic_group_details = BpPicGroupDetail.where(:bp_pic_group_id => db_pic_group.id)
+      # 担当者存在チェックフラグ
+      bp_pic_flg = false
+      db_bp_pic_group_details.each do |pic|
+        if pic.bp_pic_id == db_bp_pic.id
+          bp_pic_flg = true
+        end
+      end
+      if !bp_pic_flg
+        gr_detail = BpPicGroupDetail.new
+        gr_detail.bp_pic_group_id = db_pic_group.id
+        gr_detail.bp_pic_id = db_bp_pic.id
+        gr_detail.save!
       end
     end
   end
+end
 end
