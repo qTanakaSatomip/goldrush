@@ -79,7 +79,7 @@ class BusinessPartner < ActiveRecord::Base
 	companies[a.upcase] = [bp, []]
       else
         if row[10].blank?
-          break
+          next
         else
           # update
           update_business_partner = BusinessPartner.where(:business_partner_name => a).first
@@ -109,7 +109,7 @@ class BusinessPartner < ActiveRecord::Base
         pic.save!
       else
         if row[11].blank?
-          break
+          next
         else
           # update
           update_bp_pic = BpPic.where(:bp_pic_name => name).first
