@@ -65,11 +65,12 @@ class BusinessPartner < ActiveRecord::Base
 
       if row[10]
         # update
-        update_business_partner = BusinessPartner.where(:id => row[10].to_i).first
-        update_business_partner.down_flg = row[8].to_i
-        update_business_partner.upper_flg = row[9].to_i
-        update_business_partner.save!
-        companies[a.upcase] = [update_business_partner, []]
+        if update_business_partner = BusinessPartner.where(:id => row[10].to_i).first
+          update_business_partner.down_flg = row[8].to_i
+          update_business_partner.upper_flg = row[9].to_i
+          update_business_partner.save!
+          companies[a.upcase] = [update_business_partner, []]
+        end
       else
         unless companies[a.upcase]
           bp = BusinessPartner.new
@@ -113,10 +114,11 @@ class BusinessPartner < ActiveRecord::Base
           next
         else
           # update
-          update_bp_pic = BpPic.where(:bp_pic_name => name).first
-          update_bp_pic.email1 = row[0]
-          update_bp_pic.business_partner_id = row[10].to_i
-          update_bp_pic.save!
+          if update_bp_pic = BpPic.where(:bp_pic_name => name).first
+            update_bp_pic.email1 = row[0]
+            update_bp_pic.business_partner_id = row[10].to_i
+            update_bp_pic.save!
+          end
         end
       end
       unless pic_groups[c]
