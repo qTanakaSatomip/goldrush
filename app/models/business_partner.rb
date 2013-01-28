@@ -62,32 +62,33 @@ class BusinessPartner < ActiveRecord::Base
       else
         "test+" + row[0].sub("@","_") + "@i.applicative.jp"
       end
-      unless companies[a.upcase]
-        bp = BusinessPartner.new
-        bp.business_partner_name = a
-        bp.business_partner_short_name = a
-        bp.business_partner_name_kana = a
-        bp.sales_status_type = 'prospect'
-        bp.upper_flg = row[8].to_i
-	bp.down_flg = row[9].to_i
-	if row[1].include?('担当者')
-          bp.email = email
-	end
-	bp.created_user = 'import'
-	bp.updated_user = 'import'
-	bp.save!
-	companies[a.upcase] = [bp, []]
+
+      if row[10]
+        # update
+        update_business_partner = BusinessPartner.where(:id => row[10].to_i).first
+        update_business_partner.down_flg = row[8].to_i
+        update_business_partner.upper_flg = row[9].to_i
+        update_business_partner.save!
+        companies[a.upcase] = [update_business_partner, []]
       else
-        if row[10].blank?
-          next
-        else
-          # update
-          update_business_partner = BusinessPartner.where(:business_partner_name => a).first
-          update_business_partner.down_flg = row[8].to_i
-          update_business_partner.upper_flg = row[9].to_i
-          update_business_partner.save!
+        unless companies[a.upcase]
+          bp = BusinessPartner.new
+          bp.business_partner_name = a
+          bp.business_partner_short_name = a
+          bp.business_partner_name_kana = a
+          bp.sales_status_type = 'prospect'
+          bp.upper_flg = row[8].to_i
+	  bp.down_flg = row[9].to_i
+	  if row[1].include?('担当者')
+            bp.email = email
+	  end
+	  bp.created_user = 'import'
+	  bp.updated_user = 'import'
+	  bp.save!
+	  companies[a.upcase] = [bp, []]
         end
       end
+
       pic = BpPic.new
       pic.business_partner_id = companies[a.upcase][0].id
       name = if row[1] =~ /(.*)様/
