@@ -6,6 +6,8 @@ GoldRush::Application.routes.draw do
 
   resources :bp_pic_groups
 
+  resources :delivery_mails
+
   resources :users
 
   devise_for :auth, :class_name => User
