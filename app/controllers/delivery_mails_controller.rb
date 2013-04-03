@@ -1,6 +1,4 @@
 # -*- encoding: utf-8 -*-
-
-
 class DeliveryMailsController < ApplicationController
   # GET /delivery_mails
   # GET /delivery_mails.json
@@ -27,8 +25,11 @@ class DeliveryMailsController < ApplicationController
   # GET /delivery_mails/new
   # GET /delivery_mails/new.json
   def new
+    @select_options = []
+    for num in 0..23
+      @select_options.push([num, num])
+    end
     @delivery_mail = DeliveryMail.new
-    @delivery_mail.bp_pic_group_id = params[:id]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -87,4 +88,3 @@ class DeliveryMailsController < ApplicationController
     end
   end
 end
-

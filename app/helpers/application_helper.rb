@@ -194,6 +194,34 @@ EOS
     return raw result;
 
   end
+  
+  def insert_at_caret(insert_string)
+    result = <<EOS
+    <script type="text/javascript">
+      $.fn.extend({
+        insertAtCaret: function(v) {
+          var o = this.get(0);
+          o.focus();
+          if (jQuery.browser.msie) {
+            var r = document.selection.createRange();
+            r.text = v;
+            r.select();
+          } else {
+            var s = o.value;
+            var p = o.selectionStart;
+            var np = p + v.length;
+            o.value = s.substr(0, p) + v + s.substr(p);
+            o.setSelectionRange(np, np);
+          }
+        }
+      });
+      $('#insert').click(function() {
+      $('#area').insertAtCaret('aaaa');
+       });
+    </script>
+EOS
+    return raw result;
+  end
 
   def getDayOfWeek(date)
     getDayOfWeekDay(date.wday)
