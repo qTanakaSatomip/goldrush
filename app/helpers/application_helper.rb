@@ -194,6 +194,9 @@ EOS
     return raw result;
 
   end
+  
+  def insert_at_caret()
+  end
 
   def getDayOfWeek(date)
     getDayOfWeekDay(date.wday)
