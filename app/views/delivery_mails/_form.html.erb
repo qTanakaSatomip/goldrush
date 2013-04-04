@@ -45,7 +45,7 @@
   </tr>
 </table>
   <div class="actions">
-    <%= hidden_field "bp_pic_group_id", :id => params[:id] %>
+    <%= hidden_field_tag 'bp_pic_group_id', @delivery_mail.bp_pic_group_id %>
     <%= f.submit %>
   </div>
 <% end %>

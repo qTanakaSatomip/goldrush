@@ -30,6 +30,7 @@ class DeliveryMailsController < ApplicationController
       @select_options.push([num, num])
     end
     @delivery_mail = DeliveryMail.new
+    @delivery_mail.bp_pic_group_id = params[:id]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -46,11 +47,11 @@ class DeliveryMailsController < ApplicationController
   # POST /delivery_mails.json
   def create
     @delivery_mail = DeliveryMail.new(params[:delivery_mail])
-
+    
     respond_to do |format|
       begin
-        @delivery_mail.save!
-        format.html { redirect_to @delivery_mail, notice: 'Delivery mail was successfully created.' }
+        #@delivery_mail.save!
+        format.html { redirect_to :controller => 'bp_pic_groups', :action => 'show', :id => 1, notice: 'Delivery mail was successfully created.' }
         format.json { render json: @delivery_mail, status: :created, location: @delivery_mail }
       rescue ActiveRecord::RecordInvalid
         format.html { render action: "new" }
