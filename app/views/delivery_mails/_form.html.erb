@@ -16,11 +16,12 @@
 <table class="show_table">
   <tr>
     <th><%= f.label :subject, getLongName('delivery_mails', 'subject') %></th>
-    <td><%= f.text_field :subject %></td>
+    <td><%= f.text_field :subject, :onFocus => "xtarget = this;" %></td>
   </tr>
   <tr>
     <th><%= f.label :content, getLongName('delivery_mails', 'content') %></th>
-    <td><%= f.text_area :content, :size => '60x10' %></td>
+    <td><a href='javascript:insertAtCursor(xtarget, "%%pb_pic_name%%");'>担当者名</a><br/>
+        <%= f.text_area :content, :size => '60x10', :onFocus => "xtarget = this;" %></td>
   </tr>
   <tr>
     <th><%= f.label :mail_from_name, getLongName('delivery_mails', 'mail_from_name') %></th>

@@ -1,6 +1,6 @@
 <h1><%= @bp_pic_group.bp_pic_group_name %> 詳細</h1>
 
-<%= form_tag do %>
+<%= form_tag({:action => :add_details, :delivery_mails_id => 3}, {:method => :post}) do %>
 <table class="show_table">
   <tr>
     <th></th>
@@ -16,6 +16,7 @@
   </tr>
   <% end %>
 </table>
+<%= hidden_field_tag 'delivery_mail[id]', params[:delivery_mail_id] %>
 <%= submit_tag "メール作成" %>
 <%= back_to_link '編集', edit_bp_pic_group_path(@bp_pic_group) %> |
 <%= link_to '削除', @bp_pic_group, method: :delete, data: { confirm: '削除します。よろしいですか?' } %> |
