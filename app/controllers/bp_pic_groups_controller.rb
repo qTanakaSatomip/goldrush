@@ -44,6 +44,10 @@ class BpPicGroupsController < ApplicationController
   # GET /bp_pic_groups/1/edit
   def edit
     @bp_pic_group = BpPicGroup.find(params[:id])
+    respond_to do |format|
+      format.html  add_detail.html.erb
+      format.json { render json: @bp_pic_group }
+    end
   end
 
   # POST /bp_pic_groups
@@ -78,6 +82,9 @@ class BpPicGroupsController < ApplicationController
         format.json { render json: @bp_pic_group.errors, status: :unprocessable_entity }
       end
     end
+  end
+  
+  def add_details
   end
 
   # DELETE /bp_pic_groups/1
