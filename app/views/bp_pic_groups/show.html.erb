@@ -1,7 +1,7 @@
 <h1><%= @bp_pic_group.bp_pic_group_name %> 詳細</h1>
 
 <% if @called_by_delivery_mail_create %>
-  <%= form_tag({:action => :add_details}, {:method => :post}) do %>
+  <%= form_tag('../delivery_mails/add_details', :method => :post) do %>
   <table class="show_table">
     <tr>
       <th></th>

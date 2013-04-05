@@ -77,6 +77,10 @@ class DeliveryMailsController < ApplicationController
       end
     end
   end
+  
+  def add_details
+  end
+
 
   # DELETE /delivery_mails/1
   # DELETE /delivery_mails/1.json
