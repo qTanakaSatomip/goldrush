@@ -84,9 +84,6 @@ class BpPicGroupsController < ApplicationController
     end
   end
   
-  def add_details
-  end
-
   # DELETE /bp_pic_groups/1
   # DELETE /bp_pic_groups/1.json
   def destroy
