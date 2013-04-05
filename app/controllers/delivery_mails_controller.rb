@@ -51,6 +51,7 @@ class DeliveryMailsController < ApplicationController
 
     respond_to do |format|
       begin
+        set_user_column(@delivery_mail)
         @delivery_mail.save!
         format.html { redirect_to :controller => 'bp_pic_groups', :action => 'show', :id => @delivery_mail.bp_pic_group_id, :delivery_mail_id => @delivery_mail.id, notice: 'Delivery mail was successfully created.' }
         format.json { render json: @delivery_mail, status: :created, location: @delivery_mail }
@@ -68,6 +69,7 @@ class DeliveryMailsController < ApplicationController
 
     respond_to do |format|
       begin
+        set_user_column(@delivery_mail)
         @delivery_mail.update_attributes!(params[:delivery_mail])
         format.html { redirect_to @delivery_mail, notice: 'Delivery mail was successfully updated.' }
         format.json { head :no_content }
@@ -78,7 +80,23 @@ class DeliveryMailsController < ApplicationController
     end
   end
   
+  # POST /delivery_mails/add_details
+  # POST /delivery_mails/add_details.json
   def add_details
+    @bp_pic_ids = params[:bp_pic_ids]
+    @delivery_mail_id = params[:delivery_mail_id]
+    
+    respond_to do |format|
+      @bp_pic_ids.each do |bp_pic_id|
+        @delivery_mail_target = DeliveryMailTarget.new
+        @delivery_mail_target.delivery_mail_id = @delivery_mail_id.to_i
+        @delivery_mail_target.bp_pic_id = bp_pic_id.to_i
+        set_user_column(@delivery_mail_target)
+        @delivery_mail_target.save!
+      end
+      format.html { redirect_to :action => 'show', :id => @delivery_mail_id, notice: 'Delivery mail targets were successfully created.' }
+#        format.json { render json: @delivery_mail_target, status: :created, location: @delivery_mail_target }
+    end
   end
 
 
