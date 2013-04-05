@@ -30,9 +30,13 @@ class ApiController < ApplicationController
     render :text => 'REQUEST OK!'
   end
   
+  # メール取り込み機能
+  #   POSTFIXなどを利用してメールテキストをPOSTしてもらう
   def import_mail
-    puts params[:mail]
+    src = params[:mail]
+    # メールテキスト
+    ImportMail.import_mail(Mail.new(src), src)
     render :text => 'REQUEST OK!'
   end
-
+  
 end

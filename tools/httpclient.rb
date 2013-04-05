@@ -7,7 +7,8 @@ def main
   # 第二引数以降、key=value形式でパラメータが渡される形式
   params = {"login" => 'goldrush', "password" => 'furuponpon'}
   ARGV.each do |arg|
-    params.merge str_to_hash(arg)
+    pr = str_to_hash(arg)
+    params.merge! str_to_hash(arg)
   end
   # パラメータにSTDIN=[パラメータ名]とあったらSTDINからの入力をパラメータとして渡すモード
   if params['STDIN'] != nil
@@ -34,7 +35,7 @@ ensure
 end
 
 def str_to_hash(str, separator="=")
-  k,v = str.split("=")
+  k,v = str.split(separator)
   return {k.to_s.strip => v.to_s.strip}
 end
 
