@@ -12,4 +12,4 @@ shift 1
 umask 002
 
 cd ${RAILS_ROOT}
-${RUBY} tools/httpclients.rb $*
+${RUBY} tools/httpclient.rb $*
