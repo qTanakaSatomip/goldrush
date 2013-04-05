@@ -25,8 +25,13 @@ class ApiController < ApplicationController
   #-----------------------------------------------------------------------------
 
   # SESî•ñƒ[ƒ‹‚ðŽæ‚èž‚Þˆ—‚ðŒÄ‚Ño‚·
-  def import_mail
+  def import_mail_pop3
     ImportMail.import
+    render :text => 'REQUEST OK!'
+  end
+  
+  def import_mail
+    puts params[:mail]
     render :text => 'REQUEST OK!'
   end
 
