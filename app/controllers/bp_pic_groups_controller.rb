@@ -14,6 +14,9 @@ class BpPicGroupsController < ApplicationController
   # GET /bp_pic_groups/1
   # GET /bp_pic_groups/1.json
   def show
+    @delivery_mail_id = params[:delivery_mail_id]
+    @called_by_delivery_mail_create = !@delivery_mail_id.blank?  # ƒ[ƒ‹ì¬‰æ–Ê‚©‚ç‚Ì‘JˆÚ‚©‚Ç‚¤‚©
+    
     @title = params[:group_name]
     @bp_pic_names = []
     @bp_pic_group = BpPicGroup.find(params[:id])
@@ -23,7 +26,7 @@ class BpPicGroupsController < ApplicationController
       business_partner = BusinessPartner.find(bp_pic.business_partner_id)
       @bp_pic_names.push([business_partner.business_partner_name, bp_pic.bp_pic_name, business_partner.id, bp_pic.id])
     end
-    
+        
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @bp_pic_group }

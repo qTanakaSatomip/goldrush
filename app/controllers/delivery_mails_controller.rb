@@ -48,11 +48,11 @@ class DeliveryMailsController < ApplicationController
   def create
     @delivery_mail = DeliveryMail.new(params[:delivery_mail])
     @delivery_mail.bp_pic_group_id = params[:bp_pic_group_id]
-    
+
     respond_to do |format|
       begin
         @delivery_mail.save!
-        format.html { redirect_to :controller => 'bp_pic_groups', :action => 'show', :id => 1, notice: 'Delivery mail was successfully created.' }
+        format.html { redirect_to :controller => 'bp_pic_groups', :action => 'show', :id => @delivery_mail.bp_pic_group_id, :delivery_mail_id => @delivery_mail.id, notice: 'Delivery mail was successfully created.' }
         format.json { render json: @delivery_mail, status: :created, location: @delivery_mail }
       rescue ActiveRecord::RecordInvalid
         format.html { render action: "new" }
