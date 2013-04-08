@@ -82,11 +82,11 @@ class BpPicGroupsController < ApplicationController
   
   def bp_pic_delete
   
-    @bp_pic = BpPic.find(params[:id])
-    @bp_pic.deleted = 9
-    @bp_pic.deleted_at = Time.now
-    set_user_column @bp_pic
-    @bp_pic.save!
+    bp_pic_detail = BpPicGroupDetail.find(:first, :conditions => ["bp_pic_group_id = ? and bp_pic_id = ?", params[:bp_pic_group_id], params[:id]])
+    bp_pic_detail.deleted = 9
+    bp_pic_detail.deleted_at = Time.now
+    set_user_column bp_pic_detail
+    bp_pic_detail.save!
     
     redirect_to :action => :show, :id => params[:bp_pic_group_id]
   end
