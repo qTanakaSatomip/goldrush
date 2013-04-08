@@ -1,0 +1,64 @@
+delivery_mails_1:
+  id: 1
+  owner_id: 10
+  bp_pic_group_id: 5
+  mail_status_type: "未送信"
+  subject: "hello"
+  content: "world"
+  mail_from_name: "hoge"
+  mail_from: "huga"
+  mail_cc: "huge"
+  mail_bcc: "hoga"
+  planned_setting_at: <%= Time.now.to_s(:db) %>
+  mail_send_status_type: "ready"
+  send_end_at: <%= Time.now.to_s(:db) %>
+  created_at: <%= Time.now.to_s(:db) %>
+  updated_at: <%= Time.now.to_s(:db) %>
+  lock_version:
+  created_user: 
+  updated_user:
+  deleted_at:
+  deleted:
+delivery_mails_2:
+  id: 2
+  owner_id: 30
+  bp_pic_group_id: 5
+  mail_status_type: "未送信"
+  subject: "hello"
+  content: "world"
+  mail_from_name: "hoge"
+  mail_from: "huga"
+  mail_cc: "huge"
+  mail_bcc: "hoga"
+  planned_setting_at: <%= Time.now.to_s(:db) %>
+  mail_send_status_type: "ready"
+  send_end_at: <%= Time.now.to_s(:db) %>
+  created_at: <%= Time.now.to_s(:db) %>
+  updated_at: <%= Time.now.to_s(:db) %>
+  lock_version:
+  created_user: 
+  updated_user:
+  deleted_at:
+  deleted:
+delivery_mails_3:
+  id: 3
+  owner_id: 30
+  bp_pic_group_id: 5
+  mail_status_type: "未送信"
+  subject: "hello"
+  content: "world"
+  mail_from_name: "hoge"
+  mail_from: "huga"
+  mail_cc: "huge"
+  mail_bcc: "hoga"
+  planned_setting_at: <%= Time.now.to_s(:db) %>
+  mail_send_status_type: "ready"
+  send_end_at: <%= Time.now.to_s(:db) %>
+  created_at: <%= Time.now.to_s(:db) %>
+  updated_at: <%= Time.now.to_s(:db) %>
+  lock_version:
+  created_user: 
+  updated_user:
+  deleted_at:
+  deleted:
+  
