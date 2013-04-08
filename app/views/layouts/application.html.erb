@@ -17,8 +17,16 @@
 <%- unless @menu_hide -%>
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
-    <a class="brand"  href="/">Gold Rush</a>
-    <ul class="nav">
+    <div style="padding: 0px 10px 0px 10px;">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <p><a class="brand"  href="/">Gold Rush</a></p>
+      <div class="nav-collapse">
+        <ul class="nav">
+        <% if logged_in? %>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">プロジェクト管理<b class="caret"></b></a>
             <ul class="dropdown-menu">
@@ -32,7 +40,106 @@
               <li><%= link_to 'メールグループ', :controller => :bp_pic_groups %></li>
             </ul>
           </li>
-    </ul>
+          <% if current_user.accounting? %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">経理情報メニュー<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to '社員経費情報一覧', :controller => :base_application, :action => :do_accounting_search, :filter_type => 'waiting' %></li>
+            </ul>
+          </li>
+          <% end %>
+          <% if current_user.personnel_department? or current_user.accounting? %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">人事情報メニュー<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to '社員情報一覧', :controller => :account, :action => :list %></li>
+              <li><%= link_to '社員勤怠情報一覧', :controller => :monthly_working, :action => :total_working_hour, :edit_type => 'total_working_hour' %></li>
+              <li><%= link_to '承認権限設定', :controller => :approval_authority, :action => :report_xxx %></li>
+              <li><%= link_to '夏期休暇設定', :controller => :vacation, :action => :list_sv %></li>
+              <li><%= link_to '年次処理設定', :controller => :vacation, :action => :annual_vacation %></li>
+              <li><%= link_to 'お知らせ設定', :controller => :home, :action => :announcement %></li>
+            </ul>
+          </li>
+          <% end %>
+          <% if current_user.leader? %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">勤務表・週報一覧<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to '勤務表・週報一覧', :controller => :account, :action => :list2 %></li>
+            </ul>
+          </li>
+          <% end %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">マイメニュー<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to 'マイページ', :controller => :home %></li>
+              <li><%= link_to '勤務表', :controller => :monthly_working, :action => :list %></li>
+              <li><%= link_to '週間報告', :controller => :weekly_report, :action => :list %></li>
+              <li><%= link_to '経費精算一覧', :controller => :expense_detail, :action => :list, :id => nil %></li>
+              <li><%= link_to '申請一覧（勤怠）', :controller => :base_application, :action => :working_list, :mode => 'all_working' %></li>
+              <li><%= link_to '申請一覧（経費）', :controller => :base_application, :action => :expense_list %></li>
+              <li class="divider"></li>
+              <li>申請登録（勤怠）</li>
+              <li><%= link_to '出張申請', :controller => :business_trip_application, :action => :new %></li>
+              <li><%= link_to '休暇申請', :controller => :holiday_application, :action => :new %></li>
+              <li><%= link_to '残業申請', :controller => :other_application, :action => :new, :working_option_type => 'over_time_app' %></li>
+              <li><%= link_to '休日出勤申請', :controller => :holiday_application, :action => :new, :working_type => 'on_holiday_working' %></li>
+              <li><%= link_to '他勤怠申請', :controller => :other_application, :action => :new %></li>
+              <li class="divider"></li>
+              <li>申請登録（経費）</li>
+              <li><%= link_to '謝礼申請', :controller => :expense_application, :action => :new, :expense_app_type => 'fee_expense_app' %></li>
+              <li><%= link_to '仮払申請', :controller => :expense_application, :action => :new, :expense_app_type => 'temporary_app' %></li>
+              <li class="divider"></li>
+              <li>申請登録（その他）</li>
+              <li><%= link_to '交際費申請', :controller => :expense_application, :action => :new, :expense_app_type => 'expense_account_app' %></li>
+              <li><%= link_to '会議申請', :controller => :expense_application, :action => :new, :expense_app_type => 'meeting_expenses_app' %></li>
+              <li><%= link_to '物品購入申請', :controller => :expense_application, :action => :new, :expense_app_type => 'material_expenses_app' %></li>
+            </ul>
+          </li>
+          <% if current_user.approver? %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">承認者メニュー<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+            <li><%= link_to '承認対象者一覧', :controller => :application_approval, :action => :user_list %></li>
+            <li><%= link_to '申請承認一覧（勤怠）', :controller => :base_application, :action => :working_list_by_approver, :mode => 'all_working' %></li>
+            <li><%= link_to '申請承認一覧（経費）', :controller => :base_application, :action => :expense_list_by_approver %></li>
+            </ul>
+          </li>
+          <% elsif current_user.sales? %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">営業承認者メニュー<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to '申請一覧承認（経費）', :controller => :base_application, :action => :expense_list_by_approver %></li>
+            </ul>
+          </li>
+          <% end %>
+          <% if current_user.super? %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">マスター管理<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to 'ユーザー', users_path %></li>
+              <li><%= link_to '部署', :controller => :department, :action => :list %></li>
+              <li><%= link_to '祝日設定', :controller => :base_date, :action => :list %></li>
+              <li><%= link_to '承認権限設定', :controller => :approval_authority, :action => :report_xxx %></li>
+              <li><%= link_to 'システム設定', :controller => :sys_config, :action => :list %></li> 
+            </ul>
+          </li>
+          <% end %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">システム<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><% if logged_in? %>日付 <%= Date.today.to_date %></li>　
+                <li>Login中：(<%=h current_user.login%>)<% end %></li>
+                <li class="divider"></li>
+                <li> <%= link_to("パスワード変更", edit_auth_registration_path) %></li>
+                <li><%= link_to "ログアウト", destroy_auth_session_path, :method => :delete %></li>
+             </ul>
+          </li>
+         <% end %>
+         <%# logged_in? %>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
 <%- end -%>
