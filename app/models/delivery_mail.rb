@@ -8,45 +8,65 @@ class DeliveryMail < ActiveRecord::Base
     self.mail_send_status_type ||= 'ready'
   end
   
-  def send_mails(id)
-	  	mails_id = unsent_mails(id)
-	  	
-	  	DeliveryMail.transaction do
-	  		mails_id.each {|m|
-	  			m.mail_send_status_type = "ready"
-		  		m.save!
-	  		}
-	  	end
-	  	
-	  	DeliveryMail.transaction do
-	  		mails_id.each {|m|
-	  			m.mail_send_status_type = "finish"
-	  			m.mail_status_type = "sent"
-	  			m.save!
-	  		}
-	  	end
-  end
-  
-  # require 'action_mailer'
+  def DeliveryMail.send_mails(id, destination_list)
+	  	fetch_key = "mailer: " + Time.now.to_s + " " + rand().to_s
+	  	 
+	  DeliveryMail.
+		  where("id=? and mail_send_status_type=? and mail_status_type=? and planned_setting_at<=?",
+			  	id, "ready", "unsend", Time.now.to_s(:db)).
+		  update_all("mail_send_status_type='running', updated_user='#{fetch_key}'")
 
-	class DeliveryMailer < ActionMailer::Base
-		def send()
-			mail(
-				recipients:
-				cc:
-				bcc:
-				from:
-				subject:
-				body:
-			)
-		end
-	end
-	
-  def unsent_mails(id)
-	  	current = Time.now
-  	  ready_mails = DeliveryMail.find(:all,
-	  	  	:conditions=>["id=? and mail_status_type=? and mail_send_status_type=?", id, "unsend", "ready"])
-  	  ready_mails.select{|m| m.planned_setting_at <= current}.map{|m| m.id}
+	  	ActiveRecord::Base.transaction do
+  			mails = DeliveryMail.where("id=? and mail_send_status_type=? and updated_user=?", id, "running", fetch_key)
+  			mails.each {|m|
+		  		mail = TestMailer.new(m.mail_cc, m.mail_bcc, m.mail_from, m.subject, m.content)
+		  		destination_list.each {|d| mail.send(d)}
+		  	}
+	  	end
+	  
+	  DeliveryMail.
+		  where("id=? and mail_send_status_type=? and updated_user=?", id, "running", fetch_key).
+		  update_all("mail_send_status_type='finished'")
   end
-
 end
+
+class TestMailer
+	def initialize(cc, bcc, from, subject, body)
+		@cc = cc
+		@bcc = bcc
+		@from = from
+		@subject = subject
+		@body = body
+	end	
+	
+	def send(destination)
+		p destination
+		p @cc
+		p @bcc
+		p @from 
+		p @subject
+		p @body
+	end
+end
+
+# class Mailer < ActionMailer::Base
+# 	def initialize(cc, bcc, from, subject, body)
+# 		@cc = cc
+# 		@bcc = bcc
+# 		@from = from
+# 		@subject = subject
+# 		@body = body
+# 	end
+	
+# 	def send(destination)
+# 		mail(
+# 			recipients: destination,
+# 			cc: @cc,
+# 			bcc: @bcc,
+# 			from: @from, 
+# 			subject: @subject,
+# 			body: @body
+# 		)
+# 	end
+# end
+

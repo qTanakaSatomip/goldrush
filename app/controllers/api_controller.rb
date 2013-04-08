@@ -39,9 +39,20 @@ class ApiController < ApplicationController
     render :text => 'REQUEST OK!'
   end
   
-  def broadcast_mail
-    DeliveryMail.send_mails(params[:id])
-    render :text => 'REQUEST OK!'
+  def broadcast_mail(test)
+    # targets = DeliveryMailTarget.find(:all, :conditions=>["delivery_mail_id=?", params[:id])
+    targets = DeliveryMailTarget.find(:all, :conditions=>["delivery_mail_id=?", test])
+    target_ids = targets.map{|t| t.bp_pic_id}
+    
+    destinations = target_ids.map {|i| 
+      bp_pic = BpPic.find(i)
+      bp_pic.email1
+    }
+    
+    # DeliveryMail.send_mails(params[:id], destinations)
+    DeliveryMail.send_mails(test, destinations)
+    # render :text => 'REQUEST OK!'
+    p "REQUEST OK!"
   end
   
 end
