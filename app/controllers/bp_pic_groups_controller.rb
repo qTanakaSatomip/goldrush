@@ -80,6 +80,17 @@ class BpPicGroupsController < ApplicationController
     end
   end
   
+  def bp_pic_delete
+  
+    @bp_pic = BpPic.find(params[:id])
+    @bp_pic.deleted = 9
+    @bp_pic.deleted_at = Time.now
+    set_user_column @bp_pic
+    @bp_pic.save!
+    
+    redirect_to :action => :show, :id => params[:bp_pic_group_id]
+  end
+  
   # DELETE /bp_pic_groups/1
   # DELETE /bp_pic_groups/1.json
   def destroy
