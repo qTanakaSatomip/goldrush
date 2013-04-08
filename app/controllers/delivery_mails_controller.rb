@@ -3,7 +3,7 @@ class DeliveryMailsController < ApplicationController
   # GET /delivery_mails
   # GET /delivery_mails.json
   def index
-    @delivery_mails = DeliveryMail.page(params[:page]).per(50)
+    @delivery_mails = DeliveryMail.find(:all, :conditions => {:bp_pic_group_id => params[:id]} )
 
     respond_to do |format|
       format.html # index.html.erb
@@ -98,13 +98,23 @@ class DeliveryMailsController < ApplicationController
 #        format.json { render json: @delivery_mail_target, status: :created, location: @delivery_mail_target }
     end
   end
+  
+  def cancel
+    @delevery_mail = DeliveryMail.find(params[:id])
+    @delevery_mail.mail_status_type = 'canceled'
+    set_user_column @delevery_mail
+    @delevery_mail.save!
+    
+    redirect_to :action => :index, :id => @delevery_mail.id
+    
+  end
 
 
   # DELETE /delivery_mails/1
   # DELETE /delivery_mails/1.json
   def destroy
-    @delivery_mail = DeliveryMail.find(params[:id])
-    @delivery_mail.destroy
+  #  @delivery_mail = DeliveryMail.find(params[:id])
+  #  @delivery_mail.destroy
 
     respond_to do |format|
       format.html { redirect_to delivery_mails_url }
