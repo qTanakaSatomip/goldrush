@@ -1,5 +1,6 @@
 <h1><%= @bp_pic_group.bp_pic_group_name %> 詳細</h1>
 
+  <%= link_to "明細追加", :controller => :bp_pic_groups, :action => :new_details, :id => @bp_pic_group.id, :delivery_mail_id => @delivery_mail_id %>
   <%= form_tag(url_for(:controller => :delivery_mails, :action => :add_details), :method => :post) do %>
   <table class="show_table">
     <tr>
