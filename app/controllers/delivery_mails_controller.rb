@@ -3,7 +3,7 @@ class DeliveryMailsController < ApplicationController
   # GET /delivery_mails
   # GET /delivery_mails.json
   def index
-    @delivery_mails = DeliveryMail.find(:all, :conditions => {:bp_pic_group_id => params[:id]} )
+    @delivery_mails = DeliveryMail.where("bp_pic_group_id = ?", params[:id]).page().per(50)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -51,7 +51,9 @@ class DeliveryMailsController < ApplicationController
   def create
     @delivery_mail = DeliveryMail.new(params[:delivery_mail])
     @delivery_mail.bp_pic_group_id = params[:bp_pic_group_id]
-
+    @delivery_mail.mail_from_name = params[:mail_from_name]
+    @delivery_mail.mail_from = params[:mail_from]
+    
     respond_to do |format|
       begin
         set_user_column(@delivery_mail)

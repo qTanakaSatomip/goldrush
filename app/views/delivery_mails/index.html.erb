@@ -1,5 +1,7 @@
 <h1><%= getLongName('table_name','delivery_mails')%> 一覧</h1>
 
+  <%= paginate(@delivery_mails) %>
+
 <table class="list_table">
   <tr>
     <th>ステータス</th>
@@ -41,6 +43,7 @@
   </tr>
 <% end %>
 </table>
+  <%= paginate(@delivery_mails) %>
 
 <br />
 
