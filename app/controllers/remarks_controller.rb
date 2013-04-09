@@ -44,11 +44,15 @@ class RemarksController < ApplicationController
   # POST /remarks.json
   def create
     @remark = Remark.new(params[:remark])
+    @remark.remark_key = params[:remark_key]
+    @remark.remark_target_id = params[:remark_target_id]
+    @remark.rating = params[:remark_rating][:rating]
 
     respond_to do |format|
       begin
+       set_user_column @remark
         @remark.save!
-        format.html { redirect_to @remark, notice: 'Remark was successfully created.' }
+        format.html { redirect_to :controller => params[:remark_key], :action => 'show', :id => params[:remark_target_id], notice: 'Remark was successfully created.' }
         format.json { render json: @remark, status: :created, location: @remark }
       rescue ActiveRecord::RecordInvalid
         format.html { render action: "new" }

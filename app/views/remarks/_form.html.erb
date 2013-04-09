@@ -16,34 +16,23 @@
 <table class="show_table">
 
   <tr>
-    <th><%= f.label :id, getLongName('remarks', 'id') %></th>
-    <td><%= f.text_field :id %></td>
+    <th><%= f.label :remark_content, 'コメント' %></th>
+    <td><%= f.text_area :remark_content %></td>
   </tr>
 
   <tr>
-    <th><%= f.label :owner_id, getLongName('remarks', 'owner_id') %></th>
-    <td><%= f.number_field :owner_id %></td>
+    <th><%= f.label :rating, 'レーティング' %></th>
+        <td>
+          <%= radio_button 'remark_rating', 'rating', '1', {:class => 'star'} %>
+          <%= radio_button 'remark_rating', 'rating', '2', {:class => 'star'} %>
+          <%= radio_button 'remark_rating', 'rating', '3', {:class => 'star'} %>
+          <%= radio_button 'remark_rating', 'rating', '4', {:class => 'star'} %>
+          <%= radio_button 'remark_rating', 'rating', '5', {:class => 'star'} %>
+        </td>
   </tr>
-
-  <tr>
-    <th><%= f.label :remark_key, getLongName('remarks', 'remark_key') %></th>
-    <td><%= f.text_field :remark_key %></td>
-  </tr>
-
-  <tr>
-    <th><%= f.label :remark_target_id, getLongName('remarks', 'remark_target_id') %></th>
-    <td><%= f.number_field :remark_target_id %></td>
-  </tr>
-
-  <tr>
-    <th><%= f.label :remark_content, getLongName('remarks', 'remark_content') %></th>
-    <td><%= f.text_field :remark_content %></td>
-  </tr>
-
-  <tr>
-    <th><%= f.label :rating, getLongName('remarks', 'rating') %></th>
-    <td><%= f.number_field :rating %></td>
-  </tr>
+  
+  <%= hidden_field_tag 'remark_target_id', params[:id] %>
+  <%= hidden_field_tag 'remark_key', params[:remark_key] %>
 
 </table>
   <div class="actions">
