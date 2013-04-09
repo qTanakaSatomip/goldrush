@@ -22,6 +22,16 @@ module ApplicationHelper
     end
   end
 
+  def _time_long(time)
+    if time.blank?
+      ""
+    elsif [ActiveSupport::TimeWithZone, Time, Date].include?(time.class)
+      t = time.to_time.getlocal.strftime("%Y/%m/%d %H:%M:%S")
+    else
+      time
+    end
+  end
+
   def logged_in?
     auth_signed_in?
   end
@@ -329,10 +339,6 @@ EOS
 
   def link_to_popup_mode(name, options = {}, html_options = {}, &block)
     if @popup_mode
-#      unless action = options[:action]
-#        action = controller.action_name
-#      end
-#      options[:action] = "popup_#{action}" unless action.to_s.match(/^popup_/)
       options[:popup] = 1
     end
     link_to(name, options, html_options, &block)
@@ -351,6 +357,13 @@ EOS
 
   def request_url
     request.env['REQUEST_URI']
+  end
+
+  def back_to_link_popup_mode(name, options = {}, html_options = {}, &block)
+    if @popup_mode
+      options[:popup] = 1
+    end
+    back_to_link(name, options, html_options, &block)
   end
 
   def back_to_link(name, options = {}, html_options = {}, &block)
