@@ -11,7 +11,7 @@ class DeliveryMail < ActiveRecord::Base
   
   def DeliveryMail.send_mails(id, destination_list)
 	  	fetch_key = "mailer: " + Time.now.to_s + " " + rand().to_s
-	  	 
+	  	
 	  DeliveryMail.
 		  where("id=? and mail_send_status_type=? and mail_status_type=? and planned_setting_at<=?",
 			  	id, "ready", "unsend", Time.now.to_s(:db)).
@@ -50,24 +50,24 @@ class TestMailer
 	end
 end
 
-# class Mailer < ActionMailer::Base
-# 	def initialize(cc, bcc, from, subject, body)
-# 		@cc = cc
-# 		@bcc = bcc
-# 		@from = from
-# 		@subject = subject
-# 		@body = body
-# 	end
+class Mailer < ActionMailer::Base
+	def initialize(cc, bcc, from, subject, body)
+		@cc = cc
+		@bcc = bcc
+		@from = from
+		@subject = subject
+		@body = body
+	end
 	
-# 	def send(destination)
-# 		mail(
-# 			recipients: destination,
-# 			cc: @cc,
-# 			bcc: @bcc,
-# 			from: @from, 
-# 			subject: @subject,
-# 			body: @body
-# 		)
-# 	end
-# end
+	def send(destination)
+		mail(
+			recipients: destination,
+			cc: @cc,
+			bcc: @bcc,
+			from: @from, 
+			subject: @subject,
+			body: @body
+		)
+	end
+end
 
