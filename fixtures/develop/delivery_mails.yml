@@ -9,7 +9,7 @@ delivery_mails_1:
   mail_from: "hoge_1"
   mail_cc: "hoge_1_cc"
   mail_bcc: "hoge_1_bcc"
-  planned_setting_at: "2014-01-01 00:00:00"
+  planned_setting_at: <%= Time.now.to_s(:db) %>
   mail_send_status_type: "ready"
   send_end_at: <%= Time.now.to_s(:db) %>
   created_at: <%= Time.now.to_s(:db) %>

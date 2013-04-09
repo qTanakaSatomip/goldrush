@@ -10,83 +10,47 @@ class DeliveryMail < ActiveRecord::Base
   end
   
   def DeliveryMail.send_mails(id, destination_list)
-	  	# 
 	  	fetch_key = "mailer: " + Time.now.to_s + " " + rand().to_s
 	  	
-	  DeliveryMail.
-		  where("id=? and mail_send_status_type=? and mail_status_type=? and planned_setting_at<=?",
-			  	id, "ready", "unsend", Time.now.to_s(:db)).
-		  update_all("mail_send_status_type='running', updated_user='#{fetch_key}'")
-	  
-	  # Send Mail
-	  	ActiveRecord::Base.transaction do
-  			mails = DeliveryMail.where("id=? and mail_send_status_type=? and updated_user=?", id, "running", fetch_key)
-  			p mails.length
-  			dm = mails.shift
-  			destination_list.each {|d|
-  				p d
-  				p d.instance_of?(String)
-  		# 		Mailer.send(
-  		# 			destination: d,
-  		# 			cc: dm.mail_cc,
-  		# 			bcc: dm.mail_bcc,
-  		# 			from: dm.mail_from,
-  		# 			subject: dm.subject,
-  		# 			body: dm.content
-				# ).deliver
-  				Mailer.deliver_send(
-  					d,
-  					dm.mail_cc,
-  					dm.mail_bcc,
-  					dm.mail_from,
-  					dm.subject,
-  					dm.content
-				)
-  			}
+	  	begin
+		  DeliveryMail.
+			  where("id=? and mail_send_status_type=? and mail_status_type=? and planned_setting_at<=?",
+				  	id, "ready", "unsend", Time.now.to_s(:db)).
+			  update_all(:mail_send_status_type => 'running', :updated_user => fetch_key)
+			p destination_list.length.to_s
+			mails = DeliveryMail.where("id=? and mail_send_status_type=? and updated_user=?", id, "running", fetch_key)	
+	  		if mails.length == 1 && destination_list.length >= 1
+		  		# 配列に包まれたオブジェクトを取り出す
+	  			mail = mails.shift
+	  			destination_list.each {|d|
+	  				Mailer.del_mail_send(
+	  					d,
+	  					mail.mail_cc,
+	  					mail.mail_bcc,
+	  					mail.mail_from,
+	  					mail.subject,
+	  					mail.content
+					).deliver
+	  			}
+	  			
+			  DeliveryMail.
+				  where("id=? and mail_send_status_type=? and updated_user=?", id, "running", fetch_key).
+				  update_all(:mail_send_status_type => 'finished', :send_end_at => Time.now.to_s(:db))
+			else
+				raise "Target is Zero."
+			end
+				
+		rescue => e
+			p e
+			DeliveryMail.
+				where("id=? and updated_user=?", id, fetch_key).
+				update_all(:mail_send_status_type => 'ready', :updated_user => '')
 	  	end
-	  
-	  DeliveryMail.
-		  where("id=? and mail_send_status_type=? and updated_user=?", id, "running", fetch_key).
-		  update_all("mail_send_status_type='finished'")
   end
-  
-  
- #  class TestMailer
-	# 	def initialize(cc, bcc, from, subject, body)
-	# 		@cc = cc
-	# 		@bcc = bcc
-	# 		@from = from
-	# 		@subject = subject
-	# 		ac = ActionController::Base.new
-	# 		@body = ac.render_to_string(
-	# 			:partial => "delivery_mails/mail_body",
-	# 			:locals => {:content => body}
-	# 		) 
-	# 	end	
-		
-	# 	def send(destination)
-	# 		p destination
-	# 		p @cc
-	# 		p @bcc
-	# 		p @from 
-	# 		p @subject
-	# 		p @body
-	# 	end
-	# end
 	
 	# Private Mailer
 	class Mailer < ActionMailer::Base
-		
-		# def initialize(cc, bcc, from, subject, body)
-		# 	@cc = cc
-		# 	@bcc = bcc
-		# 	@from = from
-		# 	@subject = subject
-		# end
-		
-		def send(destination, cc, bcc, from, subject, body)
-			p "======================"
-			
+		def del_mail_send(destination, cc, bcc, from, subject, body)
 			mail(
 				recipients: destination,
 				cc: cc,
@@ -99,20 +63,6 @@ class DeliveryMail < ActiveRecord::Base
 				)
 			)
 		end
-			
-		# def send(params)
-		# 	mail(
-		# 		recipients: params[:destination],
-		# 		cc: params[:cc],
-		# 		bcc: params[:bcc],
-		# 		from: params[:from], 
-		# 		subject: params[:subject],
-		# 		body: ActionController::Base.new.render_to_string(
-		# 			:partial => "delivery_mails/mail_body",
-		# 			:locals => {:content => params[:body]}
-		# 		)
-		# 	)
-		# end
 	end
 	  
 end
