@@ -4,7 +4,7 @@ class BusinessPartnerController < ApplicationController
     list
     render :action => 'list'
   end
-
+  
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
 #  verify :method => :post, :only => [ :destroy, :create, :update ],
 #         :redirect_to => { :action => :list }
@@ -129,6 +129,7 @@ class BusinessPartnerController < ApplicationController
     @businesses = Business.find(:all, :conditions => ["deleted = 0 and eubp_id = ?", @business_partner], :order => "id desc", :limit => 50)
     @biz_offers = BizOffer.find(:all, :conditions => ["deleted = 0 and business_partner_id = ?", @business_partner], :order => "id desc", :limit => 50)
     @bp_members = BpMember.find(:all, :conditions => ["deleted = 0 and business_partner_id = ?", @business_partner], :order => "id desc", :limit => 50)
+    @remarks = Remark.find(:all, :conditions => ["deleted = 0 and remark_key = ? and remark_target_id = ?", 'business_partner', params[:id]])
   end
 
   def new
@@ -262,8 +263,7 @@ class BusinessPartnerController < ApplicationController
     end
     ext = File.extname(file.original_filename.to_s).downcase
     raise ValidationAbort.new("インポートするファイルは、拡張子がcsvのファイルでなければなりません") if ext != '.csv'
-    prodmode = SysConfig.get_config("business_partners", "prodmode")
-    BusinessPartner.import_from_csv_data(file.read, prodmode)
+    BusinessPartner.import_from_csv_data(file.read, SysConfig.email_prodmode?)
     flash[:notice] = 'インポートが完了しました'
     redirect_to(back_to || {:action => :list})
   end
