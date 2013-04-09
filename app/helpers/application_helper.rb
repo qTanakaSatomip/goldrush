@@ -311,8 +311,11 @@ EOS
   end
 
   def resizable_area(object_name, method, options = {})
-    options[:size] = '45x3' if options[:size].blank?
-    raw(put_textarea_size_change(object_name + '_' + method) + "<br/>\n" + text_area(object_name, method, options))
+#    options[:size] = '45x3' if options[:size].blank?
+#    raw(put_textarea_size_change(object_name + '_' + method) + "<br/>\n" + text_area(object_name, method, options))
+    
+    options[:style] = ';width: 80%;height: 6em' if options[:style].blank?
+    text_area(object_name, method, options)
   end
 
   def resizable_area_tag(name, value = nil, options = {})
