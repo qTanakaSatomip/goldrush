@@ -34,6 +34,6 @@
     <% end %>
   <% end %>
 
-<%= back_to_link '編集', edit_bp_pic_group_path(@bp_pic_group) %> |
+<%= back_to_link '編集', {:action => :edit, :id => @bp_pic_group.id} %> |
 <%= link_to '削除', @bp_pic_group, method: :delete, data: { confirm: '削除します。よろしいですか?' } %> |
 <%= link_or_back '戻る', bp_pic_groups_path %>
