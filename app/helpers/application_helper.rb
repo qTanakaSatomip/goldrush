@@ -230,10 +230,10 @@ EOS
   end
 
   # カラム名を受け取ってそれがシステムカラムなのかを返す
-  $SYSTEM_COLS = ['created_at','updated_at','lock_version','created_user','updated_user','deleted']
   def system_column?(column)
-    $SYSTEM_COLS.include?(column)
+    SysConfig.system_column?(column)
   end
+  
   def getFlgName(flg)
     flg == 0 ? 'なし' : 'あり'
   end

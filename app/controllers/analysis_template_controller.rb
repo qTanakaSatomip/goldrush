@@ -34,6 +34,11 @@ class AnalysisTemplateController < ApplicationController
   def new
     @analysis_template = AnalysisTemplate.new
     @analysis_template.analysis_template_type = params[:mode]
+    unless params[:import_mail_id].blank?
+      import_mail = ImportMail.find(params[:import_mail_id])
+      @analysis_template.business_partner = import_mail.business_partner
+      @analysis_template.bp_pic = import_mail.bp_pic
+    end
     
     if params[:mode] == "biz_offer"
       @business_column_names = get_column_names("business")
