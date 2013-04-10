@@ -110,7 +110,7 @@ class DeliveryMailsController < ApplicationController
     set_user_column @delevery_mail
     @delevery_mail.save!
     
-    redirect_to :action => :index, :id => @delevery_mail.id
+    redirect_to :action => :index, :id => params[:delivery_mails_id]
     
   end
 
