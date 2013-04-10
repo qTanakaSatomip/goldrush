@@ -92,7 +92,10 @@
 <script type="text/javascript">
 <!--
 function openBpPicList() {
-    disp_wide('<%=url_for :controller => 'bp_pic', :action => 'list', :popup =>1 %>' + '/' + document.getElementById("biz_offer_business_partner_id").value)
+    if (document.getElementById("biz_offer_business_partner_id").value != "")
+    {
+      disp_wide('<%=url_for :controller => 'bp_pic', :action => 'list', :popup =>1 %>' + '&id=' + document.getElementById("biz_offer_business_partner_id").value)
+    }
 }
 
 document.setBp = function(bp) {
