@@ -39,20 +39,19 @@ class ApiController < ApplicationController
     render :text => 'REQUEST OK!'
   end
   
-  def broadcast_mail(test)
-    targets = DeliveryMailTarget.find(:all, :conditions=>["delivery_mail_id=?", params[:id])
+  def broadcast_mail
+    targets = DeliveryMailTarget.find(:all, :conditions=>["delivery_mail_id=?", params[:id]])
     target_ids = targets.map{|t| t.bp_pic_id}
     
     # 送信先アドレスを取得
     destinations = target_ids.map {|i| 
       bp_pic = BpPic.find(i)
-      bp_pic.email1
+      # bp_pic.email1
     }
-    
     # メール送信
     DeliveryMail.send_mails(params[:id], destinations)
     
     render :text => 'REQUEST OK!'
   end
-  
+
 end
