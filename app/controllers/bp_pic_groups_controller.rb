@@ -104,10 +104,12 @@ class BpPicGroupsController < ApplicationController
     errids = []
     respond_to do |format|
       begin
+        bp_pic_group_details = BpPicGroupDetail.where(:bp_pic_group_id => @bp_pic_group_id)
         @bp_pic_ids.each do |bp_pic_id|
           # validate
           if bp_pic_id =~ /\D+/ or
-            BpPic.find(:first, :conditions => {:id => bp_pic_id}).nil?
+            BpPic.find(:first, :conditions => {:id => bp_pic_id}).nil? or
+            bp_pic_group_details.any?{|detail| detail.bp_pic_id == bp_pic_id.to_i}
             errids << bp_pic_id
             next
           end
@@ -141,7 +143,8 @@ class BpPicGroupsController < ApplicationController
     set_user_column bp_pic_detail
     bp_pic_detail.save!
     
-    redirect_to :action => :show, :id => params[:bp_pic_group_id]
+    redirect_to :action => :show, :id => params[:bp_pic_group_id], :delivery_mail_id => params[:delivery_mail_id]
+
   end
   
   # DELETE /bp_pic_groups/1
