@@ -83,7 +83,7 @@ class BpPicGroupDetailsController < ApplicationController
     @bp_pic_group_detail.save!
     
     respond_to do |format|
-      format.html { redirect_to url_for(:controller => :bp_pic_groups, :action => :show, :id => @bp_pic_group_detail.bp_pic_group_id, :delivery_mail_id => params[:delivery_mail_id]), notice: 'Bp pic group detail was successfully deleted.' }
+      format.html { redirect_to url_for(:controller => :bp_pic_groups, :action => :show, :id => @bp_pic_group_detail.bp_pic_group_id), notice: 'Bp pic group detail was successfully deleted.' }
     end
 
   end
