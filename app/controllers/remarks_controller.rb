@@ -51,7 +51,7 @@ class RemarksController < ApplicationController
       begin
        set_user_column @remark
         @remark.save!
-        format.html { redirect_to :controller => params[:remark_key], :action => 'show', :id => params[:remark_target_id], notice: 'Remark was successfully created.' }
+        format.html { redirect_to url_for(:controller => params[:remark_key], :action => 'show', :id => params[:render_id]), notice: 'Remark was successfully created.' }
         format.json { render json: @remark, status: :created, location: @remark }
       rescue ActiveRecord::RecordInvalid
         format.html { render action: "new" }

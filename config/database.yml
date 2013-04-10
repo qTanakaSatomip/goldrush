@@ -17,7 +17,8 @@ development:
 #  username: trydevisedev
   username: grdev
   password: grdev
-  socket: /var/lib/mysql/mysql.sock
+  host: 127.0.0.1
+  socket: /var/run/mysqld/mysqld.sock
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
