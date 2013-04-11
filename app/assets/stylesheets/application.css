@@ -98,3 +98,6 @@ table.input_table th {
   background-color: #F0BB8C
 }
 
+#star_onmouse a:hover {
+  text-decoration: none;
+}
