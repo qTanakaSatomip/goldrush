@@ -17,7 +17,7 @@
   </tr>
 
 <% @delivery_mails.each do |delivery_mail| %>
-  <tr>
+  <tr <%= "bgcolor = #999999" unless delivery_mail.mail_status_type == 'unsend' %> id="tr_<%= delivery_mail.id %>">
     <td>
       <% if delivery_mail.mail_status_type == 'unsend' %>
         未送信
