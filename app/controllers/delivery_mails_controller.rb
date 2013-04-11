@@ -44,6 +44,10 @@ class DeliveryMailsController < ApplicationController
   # GET /delivery_mails/1/edit
   def edit
     @delivery_mail = DeliveryMail.find(params[:id])
+    respond_to do |format|
+      format.html # edit.html.erb
+      format.json { render json: @delivery_mail }
+    end
   end
 
   # POST /delivery_mails
