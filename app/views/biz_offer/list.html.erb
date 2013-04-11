@@ -12,6 +12,7 @@
     <th><%=getShortName('businesses', 'business_status_type') %></th>
     <th><%=getShortName('biz_offers', 'biz_offer_status_type') %></th>
     <th><%=getShortName('biz_offers', 'payment_text') %></th>
+    <th>Star</th>
   </tr>
   
 <% for biz_offer in @biz_offers %>
@@ -24,6 +25,7 @@
     <td><%=h biz_offer.business.business_status_type %></td>
     <td><%=h biz_offer.biz_offer_status_type_name %></td>
     <td><%=h biz_offer.payment_text %></td>
+    <td style="width: 7em;text-align:center"><div id="star_onmouse"><%= star_links_bizoffer(biz_offer.id, biz_offer.business.starred, biz_offer.business.id) %></div></td>
   </tr>
 <% end %>
 </table>
@@ -33,3 +35,24 @@
 <br />
 
 <%= link_to (getLongName('table_name','biz_offers')+'の新規作成'), :action => 'new' %>
+
+<script type="text/javascript">
+<!--
+var ajax_url = '<%= url_for(:controller => :business, :action => :change_star) %>';
+
+function changeFlg(id, param, type){
+  jQuery.ajax({
+    url: ajax_url + '?id=' + id + '&param_id=' + param + '&type=' + type,
+    success: function(data, dataType){
+        if (data == '1') {
+          $("#starred_icon_" + id)[0].style.color = '#ffff00';
+        } else {
+          $("#starred_icon_" + id)[0].style.color = '#dfdfdf';
+        }
+    }
+  });
+  return false;
+}
+
+// -->
+</script>

@@ -467,8 +467,8 @@ EOS
     DateTimeUtil.calHourMinuteFormat(sec)
   end
   
-    def star_links(business_partner)
-    link_to(raw("<span id='starred_icon_#{business_partner.id}' style='#{_starstyle(business_partner.starred)}'>★</span>"), "#", :onclick => "return changeFlg(#{business_partner.id}, 'starred');")
+    def star_links(target)
+    link_to(raw("<span id='starred_icon_#{target.id}' style='#{_starstyle(target.starred)}'>★</span>"), "#", :onclick => "return changeFlg(#{target.id}, 'starred');")
   end
   
   def _starstyle(flg)
