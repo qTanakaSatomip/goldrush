@@ -144,7 +144,7 @@ class BusinessController < ApplicationController
   end
   
     def change_star
-    business = Business.find(params[:param_id])
+    business = Business.find(params[:id])
     if business.starred == 1
       business.starred = 0
     else

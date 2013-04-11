@@ -62,7 +62,7 @@
     <td><%=h business_partner.eu_flg %></td>
     <td><%=h business_partner.upper_flg %></td>
     <td><%=h business_partner.down_flg %></td>
-    <td style="width: 7em;text-align:center"><div id="star_onmouse"><%= star_links(business_partner) %></div></td>
+    <td style="width: 7em;text-align:center"><span class="linked_star"><%= star_links(business_partner) %></span></td>
   </tr>
 <% end %>
 </table>
@@ -148,9 +148,9 @@ function changeFlg(id, type){
     url: ajax_url + '?id=' + id + '&type=' + type,
     success: function(data, dataType){
         if (data == '1') {
-          $("#starred_icon_" + id)[0].style.color = '#ffff00';
+          $("#starred_icon_" + id)[0][i].style.color = '#ffff00';
         } else {
-          $("#starred_icon_" + id)[0].style.color = '#dfdfdf';
+          $("#starred_icon_" + id)[0][i].style.color = '#dfdfdf';
         }
     }
   });

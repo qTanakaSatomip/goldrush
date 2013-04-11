@@ -468,7 +468,7 @@ EOS
   end
   
     def star_links(target)
-    link_to(raw("<span id='starred_icon_#{target.id}' style='#{_starstyle(target.starred)}'>★</span>"), "#", :onclick => "return changeFlg(#{target.id}, 'starred');")
+    link_to(raw("<span id='starred_icon_#{target.id}' name='starred_icon_name_#{target.id}' style='#{_starstyle(target.starred)}'>★</span>"), "#", :onclick => "return changeFlg(#{target.id}, 'starred');")
   end
   
   def _starstyle(flg)

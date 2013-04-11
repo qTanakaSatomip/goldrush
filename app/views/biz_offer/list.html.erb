@@ -25,7 +25,7 @@
     <td><%=h biz_offer.business.business_status_type %></td>
     <td><%=h biz_offer.biz_offer_status_type_name %></td>
     <td><%=h biz_offer.payment_text %></td>
-    <td style="width: 7em;text-align:center"><div id="star_onmouse"><%= star_links_bizoffer(biz_offer.id, biz_offer.business.starred, biz_offer.business.id) %></div></td>
+    <td style="width: 7em;text-align:center"><span class="linked_star"><%= star_links(biz_offer.business) %></span></td>
   </tr>
 <% end %>
 </table>
@@ -40,14 +40,21 @@
 <!--
 var ajax_url = '<%= url_for(:controller => :business, :action => :change_star) %>';
 
-function changeFlg(id, param, type){
+function changeFlg(id, type){
   jQuery.ajax({
-    url: ajax_url + '?id=' + id + '&param_id=' + param + '&type=' + type,
+    url: ajax_url + '?id=' + id + '&type=' + type,
     success: function(data, dataType){
+    
+    star_list = document.getElementsByName("starred_icon_name_" + id)
+    
         if (data == '1') {
-          $("#starred_icon_" + id)[0].style.color = '#ffff00';
+          for (i=0; i < star_list.length; i++){
+            star_list[i].style.color = '#ffff00';
+          }
         } else {
-          $("#starred_icon_" + id)[0].style.color = '#dfdfdf';
+          for(i=0; i < star_list.length; i++){
+            star_list[i].style.color = '#dfdfdf';
+          }
         }
     }
   });
