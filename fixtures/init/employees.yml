@@ -4,12 +4,12 @@ employees_1:
   user_id: 1
   department_id: 1
   employee_type: "regular"
-  position: "ŠÇ—Ò"
+  position: "ç®¡ç†è€…"
   employee_code: "9801"
   insurance_code: "001"
-  employee_name: "ŠÇ—Ò"
-  employee_kana_name: "ŠÇ—Ò"
-  employee_short_name: "ŠÇ—Ò"
+  employee_name: "ç®¡ç†è€…"
+  employee_kana_name: "ç®¡ç†è€…"
+  employee_short_name: "ç®¡ç†è€…"
   birthday_date: <%= "2000/01/01" %>
   sex_type: "man"
   email: ""
