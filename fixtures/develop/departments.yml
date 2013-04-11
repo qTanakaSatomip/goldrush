@@ -1,9 +1,9 @@
 departments_1:
   id: 1
   owner_id: 
-  department_code: "1"
-  department_name: "å–¶æ¥­"
-  department_shortname: "å–¶æ¥­"
+  department_code: "01"
+  department_name: "Œo‰cº"
+  department_shortname: "Œo‰c"
   display_order: 1
   created_at: <%= Time.now.to_s(:db) %>
   updated_at: <%= Time.now.to_s(:db) %>
@@ -14,9 +14,9 @@ departments_1:
 departments_2:
   id: 2
   owner_id: 
-  department_code: "2"
-  department_name: "ä¼ç”»éƒ¨"
-  department_shortname: "ä¼ç”»"
+  department_code: "02"
+  department_name: "‰c‹Æ•”"
+  department_shortname: "‰c‹Æ"
   display_order: 2
   created_at: <%= Time.now.to_s(:db) %>
   updated_at: <%= Time.now.to_s(:db) %>
@@ -27,36 +27,10 @@ departments_2:
 departments_3:
   id: 3
   owner_id:  
-  department_code: "3"
-  department_name: "ã‚¯ãƒªã‚¨ã‚¤ãƒ†ã‚£ãƒ–"
-  department_shortname: "ã‚¯ãƒªã‚¨"
+  department_code: "03"
+  department_name: "ŠJ”­•”"
+  department_shortname: "ŠJ”­"
   display_order: 3
-  created_at: <%= Time.now.to_s(:db) %>
-  updated_at: <%= Time.now.to_s(:db) %>
-  lock_version: 0
-  created_user: "initial"
-  updated_user: "initial"
-  deleted: 0
-departments_4:
-  id: 4
-  owner_id:  
-  department_code: "4"
-  department_name: "ç·å‹™çµŒç†"
-  department_shortname: "çµŒç†"
-  display_order: 4
-  created_at: <%= Time.now.to_s(:db) %>
-  updated_at: <%= Time.now.to_s(:db) %>
-  lock_version: 0
-  created_user: "initial"
-  updated_user: "initial"
-  deleted: 0
-departments_5:
-  id: 5
-  owner_id: 
-  department_code: "5"
-  department_name: "å–¶æ¥­é–‹ç™º"
-  department_shortname: "é–‹ç™º"
-  display_order: 5
   created_at: <%= Time.now.to_s(:db) %>
   updated_at: <%= Time.now.to_s(:db) %>
   lock_version: 0
